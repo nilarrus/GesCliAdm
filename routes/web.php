@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::get('/', function () {
+    return view('clients.client');
+});*/
+
+Route::get('/','ClientsController@index');
+
+Route::post('/create','ClientsController@create');

@@ -1,0 +1,88 @@
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    margin: 50px;
+    flex-direction: column;
+    text-align: center;
+}
+
+.content{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+form{
+    margin-bottom: 20px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+#app td,th,li{
+    border: 1px solid black;
+    width: 200px;
+    padding: 12px 20px 12px 20px;
+    text-align: center;
+}
+
+th{
+    text-transform: uppercase;
+}
+
+.clickable:hover{
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+}
+
+ul,ol{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+.title{
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.topContainer{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+.top-title,.addUserIcon{
+    display: inline-block;
+}
+.addUserIcon{
+    float: right;
+}
+.addUserIcon i{
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 25px;
+}
+
+.addUserIcon i:hover{
+    color: red;
+}

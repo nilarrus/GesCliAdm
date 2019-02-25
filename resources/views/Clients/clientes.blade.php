@@ -13,7 +13,6 @@
         <div class="addUserIcon"><i class="fas fa-plus"></i></div>
     </div>
 
-
     <div id="formdiv">
         <form action="/create" method="POST">
             @csrf

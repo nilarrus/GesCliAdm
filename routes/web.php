@@ -17,10 +17,10 @@ Route::get('/', function () {
 Route::get('/Clients', function(){
 	return view('Clients.clientes');
 });
-Route::get('/Clients', function(){
+/*Route::get('/Clients', function(){
 	return view('Clients.detalle_ven');
 });
 Route::get('/Clients', function(){
 	return view('Clients.detalle_cli');
-});
+});*/
 

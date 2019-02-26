@@ -1,7 +1,7 @@
-function createStructure(keys,values){
-    var table = $('<table>').appendTo('#app');
+function createStructure(keys,values,parent){
+    var table = $('<table>').appendTo(parent);
     createItem(table,["thead",'tr'],undefined,undefined,"th",keys);
-    createItem(table,['tbody'],["tr"],["class=clickable","data-href=clientes/"],"td",values);
+    createItem(table,['tbody'],["tr"],["class=clickable","data-href=clients/"],"td",values);
     //createItem("#app",['div','ul'],undefined,["class=title"],"li",keys);
     //createItem("#app",['div'],["ul"],["class=clickable","data-href=clientes/"],"li",values);
 
@@ -47,11 +47,7 @@ function createItem(parent,middleparent,middlechild,Params,child,values){
         }
 
         if(Params != undefined && typeof Params == "object"){
-            try{
-                setParams(intermediate,getParams(Params,intermediate.data()));
-            }catch(err){
-                console.log(err.message);
-            } 
+            setParams(intermediate,getParams(Params,intermediate.data()));
         }
     })
 }
@@ -118,7 +114,7 @@ function onlyUnique(value, index, self) {
 }
 
 //Función para convertir un json en dos arrays, uno que contiene las keys y otro que contiene los valores
-function filterData(result){
+function filterData(result,parent){
     var listado = result;
     /*
     if(result.data.childs){
@@ -126,25 +122,19 @@ function filterData(result){
     }else{
         var listado = result.data;
     }*/
-    
     var keys = [];
     var values = [];
-    listado.forEach(function(items){
-        var list = [];
-        for(item in items){
-            keys.push(item);
-            list.push(items[item]);
-        };
-        values.push(list);
-        
-    });
+        listado.forEach(function(items){
+            var list = [];
+            for(item in items){
+                keys.push(item);
+                list.push(items[item]);
+            };
+            values.push(list);
+            
+        });
 
     keys = keys.filter(onlyUnique);
 
-    createStructure(keys,values);
+    createStructure(keys,values,parent);
 }
-
-$(document).ready(function(){
-    filterData(clientes);
-
-});

@@ -11,16 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/Clients', function(){
-	return view('Clients.clientes');
-});
+/*Route::get('/', function () {
+    return view('home');
+});*/
+
+Route::get('/', 'ClientsController@index');
+
+Route::post('/clients/create','ClientsController@create');
+
+Route::get('/clients/{id}', 'ClientsController@show');
+
+Route::put('/clients/{id}', 'ClientsController@edit');
+
 /*Route::get('/Clients', function(){
-	return view('Clients.detalle_ven');
-});
-Route::get('/Clients', function(){
 	return view('Clients.detalle_cli');
 });*/
 

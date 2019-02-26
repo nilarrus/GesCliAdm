@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 	<html>
 	<head>
-	<!-- Styles 
-	<link rel="stylesheet" href="{{ asset('css/style.css') }}">-->
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+	<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>	
 		<title></title>
 		<style>
             html, body {
@@ -35,6 +35,11 @@
 		@include('navbar')
 		@yield('content')
 
-		<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>	
+		<button id="GenerarError">Generar Error</button>
+		<div class="Error" >
+			
+		</div>
+		<div class="empty" ></div>
+		
 	</body>
 	</html>

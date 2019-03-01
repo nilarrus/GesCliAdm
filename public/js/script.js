@@ -1,18 +1,3 @@
-function createStructure(keys,values,parent){
-    var table = $('<table>').appendTo(parent);
-    createItem(table,["thead",'tr'],undefined,undefined,"th",keys);
-    createItem(table,['tbody'],["tr"],["class=clickable","data-href=clients/"],"td",values);
-    //createItem("#app",['div','ul'],undefined,["class=title"],"li",keys);
-    //createItem("#app",['div'],["ul"],["class=clickable","data-href=clientes/"],"li",values);
-
-    //Función que convierte los elementos con la clase pasada por parámetro en clickable y el link será el data-href
-    jQuery(document).ready(function($) {
-        $(".clickable").click(function() {
-            window.location = $(this).data("href");
-        });
-    });
-}
-
 /**
  * 
  * @param {*} parent Elemento existente en el HTML bajo el que se creará la estructura
@@ -114,7 +99,7 @@ function onlyUnique(value, index, self) {
 }
 
 //Función para convertir un json en dos arrays, uno que contiene las keys y otro que contiene los valores
-function filterData(result,parent){
+function filterData(result){
     var listado = result;
     /*
     if(result.data.childs){
@@ -134,7 +119,45 @@ function filterData(result,parent){
             
         });
 
-    keys = keys.filter(onlyUnique);
+    keys = keys.filter(onlyUnique); 
+    return [keys,values];
+}
 
-    createStructure(keys,values,parent);
+function createDashboard(parent,data){
+    var form = $('<form>');
+    var csrfVar = $('meta[name="csrf-token"]').attr('content');
+    form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
+    form.append('<input type="hidden" name="_method" value="PUT">');
+    data.forEach(function(elements){
+        for(element in elements){
+            if(element === "id"){
+                form.attr({
+                        method: "post",
+                        action: "/clients/" + elements[element]
+                    })
+                    .appendTo(parent)
+            }else{
+                var label = $('<label>')
+                                .attr({for: element})
+                                .text(element + ": ")
+                                .appendTo(form);
+                $('<input>')
+                    .attr({ type: 'text', name: element, value: elements[element], placeholder: element})
+                    .appendTo(label);
+            }
+            
+        }
+    });
+
+    $('<button>')
+        .text('Guardar')
+        .attr({class: "btn btn-primary saveClient"})
+        .appendTo(form);
+
+    $('<div>')
+        .attr({
+            class:'divtop'
+        })
+        .text('Información del cliente')
+        .appendTo(parent);
 }

@@ -26,15 +26,17 @@ class ClientsController extends Controller
                 'direccion' => $request->input('direccion'),
                 'provincia' => $request->input('provincia'),
                 'localidad' => $request->input('localidad'),
-                'CIF/NIF' => $request->input('CIF/NIF'),
+                'CIF/NIF' => $request->input('cif/nif'),
                 'email' => $request->input('email'),
                 'telefono' => $request->input('telefono'),
                 'cp' => $request->input('cp'),
             ]);
+
+        return redirect()->back();
     }
 
     public function show($id){
-        $cliente = Cliente::where('id',$id)->get();
+        $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
         $ventas = Venta::where('Id_Cliente',$id)->get();
 
 

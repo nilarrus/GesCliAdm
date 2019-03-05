@@ -2,6 +2,7 @@
 
 {{--
 @section('content')
+<!--
 	<div class="container flex-center">
 		<div class="content">
 			
@@ -25,5 +26,13 @@
         </form>
     </div>
 
+    -->
     <script>var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ; console.log(clientes);</script>
+
+    
+
 @stop--}}
+
+
+
+

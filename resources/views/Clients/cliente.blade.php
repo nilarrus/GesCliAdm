@@ -71,6 +71,7 @@
             width: 100%;
             display: flex;
             flex-direction: row; 
+            justify-content: center;
         }
 
         .saveClient{
@@ -104,16 +105,10 @@
 @section('content')
     <div class="contenido">
         <div id="cliente">
-            <div class="topContainer">
-                <div class="top-title">Información del cliente</div>
-            </div>
             <div class="datosCliente"></div>
         </div>
 
         <div id="ventas">
-            <div class="topContainer">
-                <div class="top-title">Ventas</div>
-            </div>
             <div class="datosventas"></div>
             <table id="tablaventas"></table>
         </div>
@@ -127,12 +122,7 @@
             if(data[0].length === 0){
                 var div = $('<div class="NoResults"><h3>No hay ventas disponibles</h3></div>')
                     .appendTo('.datosventas');
-                $('<div>')
-                    .attr({
-                        class:'divtop'
-                    })
-                    .text('Ventas')
-                    .appendTo(div);
+                createSelectedElement(div,'div','Ventas',{class:'divtop'})
             }else{
                 createItem('#tablaventas',["thead",'tr'],undefined,undefined,"th",data[0]);
                 createItem('#tablaventas',['tbody'],["tr"],["class=clickable","data-href=/ventas/"],"td",data[1]);
@@ -145,8 +135,6 @@
             createDashboard('.datosCliente',cliente);
             $('input[name="cif/nif"]').prop('readonly', true);
             
-        }); 
-
-        
+        });
     </script>
 @stop

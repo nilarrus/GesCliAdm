@@ -100,16 +100,10 @@ function onlyUnique(value, index, self) {
 
 //Función para convertir un json en dos arrays, uno que contiene las keys y otro que contiene los valores
 function filterData(result){
-    var listado = result;
-    /*
-    if(result.data.childs){
-        var listado = result.data.childs;
-    }else{
-        var listado = result.data;
-    }*/
+    //var result = result.data;
     var keys = [];
     var values = [];
-        listado.forEach(function(items){
+        result.forEach(function(items){
             var list = [];
             for(item in items){
                 keys.push(item);
@@ -137,27 +131,22 @@ function createDashboard(parent,data){
                     })
                     .appendTo(parent)
             }else{
-                var label = $('<label>')
-                                .attr({for: element})
-                                .text(element + ": ")
-                                .appendTo(form);
-                $('<input>')
-                    .attr({ type: 'text', name: element, value: elements[element], placeholder: element})
-                    .appendTo(label);
+                var label = createSelectedElement(form,'label',element+': ',{for: element});
+                createSelectedElement(label,'input',undefined,{ type: 'text', name: element, value: elements[element], placeholder: element});
             }
-            
         }
     });
 
-    $('<button>')
-        .text('Guardar')
-        .attr({class: "btn btn-primary saveClient"})
-        .appendTo(form);
+        createSelectedElement(form,'button','Guardar',{class: "btn btn-primary saveClient"});
+        createSelectedElement(parent,'div','Información del cliente',{class:'divtop'});
+    
+}
 
-    $('<div>')
-        .attr({
-            class:'divtop'
-        })
-        .text('Información del cliente')
-        .appendTo(parent);
+function createSelectedElement(parent,child,texto,params){
+    var element = $('<' + child + '>')
+        .attr(params)
+        .text(texto)
+        .appendTo(parent)
+
+    return element;
 }

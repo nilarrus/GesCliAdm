@@ -10,7 +10,6 @@ class ClientsController extends Controller
 {
     public function index(){
         $clientes = Cliente::all(['id','nombre','provincia','cif/nif','cp']);
-
         return view('clients.clientes', compact('clientes'));
     }
 

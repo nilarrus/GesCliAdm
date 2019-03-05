@@ -21,7 +21,7 @@ html, body {
 }
 
 .content{
-    width: 60%;
+    /*width: 60%;*/
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -59,14 +59,6 @@ th{
     cursor: pointer;
 }
 
-/*ul,ol{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    padding: 0;
-}*/
-
 .title{
     font-size: 16px;
     font-weight: 700;
@@ -77,12 +69,15 @@ th{
     text-align: center;
     font-size: 30px;
     margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
 }
 .top-title,.addUserIcon{
     display: inline-block;
 }
 .addUserIcon{
     float: right;
+    margin-left: 100px;
 }
 .addUserIcon i{
     font-size: 25px;

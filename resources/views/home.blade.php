@@ -10,41 +10,52 @@
 	<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	@yield('ownCSS')
-		<title></title>
-		<style>
-            html, body {
-                background-color: #fcc5be;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 250;
-                height: 100vh;
-                margin: 0;
-            }
-            nav.navbar {
-    			background-color: #44221f;
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+	<title></title>
+	<style>
+		html, body {
+			background-color: #fcc5be;
+			color: #636b6f;
+			font-family: 'Nunito', sans-serif;
+			font-weight: 250;
+			height: 100vh;
+			margin: 0;
+		}
+		nav.navbar {
+			background-color: #44221f;
 
-			}
+		}
 
-			.navbar{
-				border-radius: 0 !important;
-			}
-			nav.navbar ul.nav li a {
-   			 font-family:  'Nunito', sans-serif;
-   			 color:#fcc5be;
- 			}
- 			nav.navbar  div.nav a{
-				color:white;
- 			}
+		.navbar{
+			border-radius: 0 !important;
+		}
+		nav.navbar ul.nav li a {
+			font-family:  'Nunito', sans-serif;
+			color:#fcc5be;
+		}
+		nav.navbar  div.nav a{
+			color:white;
+		}
 
-        </style>
+	</style>
 	</head>
 	<body>
 		@include('navbar')
+<<<<<<< HEAD
 		
 		<div class="container flex-center">
 			@yield('content')
 		</div>
 		@yield('modal')
+=======
+		@yield('content')
+
+		<button id="GenerarError">Generar Error</button>
+		<div class="Error" >
+			
+		</div>
+		<div class="empty" ></div>
+>>>>>>> 2db3840046f0c8c3690ec25a83ce0cefc9c4f25c
 		
 	</body>
 	</html>

@@ -113,3 +113,25 @@ th{
     width: 100%;
     clear: both;
 }
+
+div.Error{
+    background-color: white;opacity: 0.5;
+    border: 4px solid red;
+    border-radius:10px;
+    padding: 20px 20px;
+    box-shadow: 20px 20px 20px;
+    animation: infinite resplandorAnimation 2s;
+    float: right;
+    margin: 5px;
+}
+
+@keyframes resplandorAnimation {
+  0%,100%{
+    box-shadow: 10px 20px 20px;
+  }
+  50%{
+  box-shadow: 0px 0px 0px;
+  
+  }
+
+}

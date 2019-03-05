@@ -150,3 +150,17 @@ function createSelectedElement(parent,child,texto,params){
 
     return element;
 }
+$(document).ready(function(){
+   // filterData(clientes);
+
+});
+
+$(document).ready(function(){
+    $('.Error').hide();
+    $('#GenerarError').click(function(){   
+        $('.Error').html("");
+        $('.Error').toggle().prepend($('<img>',{id:'theImg',src:'img/exclamacion.png',width:'40px'})).append("Esto es un mensaje de Error");
+
+
+    });
+});

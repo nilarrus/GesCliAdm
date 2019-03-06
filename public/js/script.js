@@ -8,7 +8,7 @@
  * @param {*} child El elemento más bajo de la estructura. Contendrá el texto.
  * @param {*} values Array de elementos que contendrán el texto que se pondrá en child.
  */
-function createItem(parent,middleparent,middlechild,Params,child,values){
+/*function createItem(parent,middleparent,middlechild,Params,child,values){
     if(middleparent != undefined){
         parent = createParent(parent,middleparent);
     }
@@ -144,10 +144,13 @@ function createDashboard(parent,data){
 }
 
 function createTable(parent,params,data){
-
+    var table = createSelectedElement(parent,'table',undefined,params)
 }
 
 function createSelectedElement(parent,child,texto,params){
+    if(params === null){
+        
+    }
     var element = $('<' + child + '>')
         .attr(params)
         .text(texto)
@@ -158,12 +161,12 @@ function createSelectedElement(parent,child,texto,params){
 $(document).ready(function(){
    // filterData(clientes);
 
-});
+});*/
 
 $(document).ready(function(){
     $('.Error').hide();
     $('#GenerarError').click(function(){   
         $('.Error').html("");
-        $('.Error').toggle().prepend($('<img>',{id:'theImg',src:'img/exclamacion.png',width:'40px'})).append("Esto es un mensaje de Error");
+        $('.Error').toggle().prepend($('<img>',{id:'theImg',src:'/img/exclamacion.png',width:'40px'})).append("Esto es un mensaje de Error");
     });
 });

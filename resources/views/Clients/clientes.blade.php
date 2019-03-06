@@ -3,34 +3,27 @@
 @section('content')
     <div class="content">
         <div class="topContainer">
-            <div class="top-title">Listado de Clientes</div>
+            <div class="top-title">
+                Listado de Clientes:
+            </div> 
             <div class="addUserIcon">
                 <a href="#costumModal10" data-toggle="modal">
                     <button class="btn btn-primary" type="submit">Añadir Cliente</button>
-                    <!--<i id="adduser" class="fas fa-plus"></i>-->
                 </a>
             </div>
+            
         </div>
-        <div id="app"></div>
+    </div>
+    <div id="ClientsTable">
     </div>
     <script>
         var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ;
-        console.log(clientes);
-        $(document).ready(function(){
-            var data = filterData(clientes,'#app');
-            createStructure(data[0],data[1]);
-            $(".clickable").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
+       
+       CreateTable("#ClientsTable",clientes,undefined);
 
-        function createStructure(keys,values){
-            var table = $('<table>').appendTo('#app');
-            createItem(table,["thead",'tr'],undefined,undefined,"th",keys);
-            createItem(table,['tbody'],["tr"],["class=clickable","data-href=clients/"],"td",values);
-            //createItem("#app",['div','ul'],undefined,["class=title"],"li",keys);
-            //createItem("#app",['div'],["ul"],["class=clickable","data-href=clientes/"],"li",values);
-        }
+       $('.clickable').click(function(){
+            window.location=$(this).data('href');
+       })
     </script>
 @stop
 
@@ -72,4 +65,8 @@
             </div>
         </div>
     </div>
+   
+
 @stop
+
+

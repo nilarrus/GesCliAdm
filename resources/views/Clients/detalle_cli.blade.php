@@ -1,25 +1,129 @@
 @extends('home')
 
+@section('ownCSS')
+
+    <style>
+    	#Input,#Sales{
+    		margin: 15px;
+    	}
+        #Input{
+            padding: 60px 60px 10px 60px;
+            background-color: rgb(241, 241, 187) ;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            position: relative;
+            width: 40%;
+        }
+        #Input form{
+            width: 300px;
+            clear: both;
+            text-align: left !important;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        form input{
+            width: 70%;
+            clear: both;
+            float: right;
+            opacity: 0.9;
+            padding: 4px;
+            border-radius: 2px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.6);
+            border: 0;
+            outline: none;
+            transition: border-bottom 0.2s linear;
+        }
+
+        form input:focus{
+            border-bottom: 2px solid black;
+        }
+
+        form input::placeholder{
+            opacity: 0.3;
+            text-transform: capitalize;
+            padding-left: 5px;
+        }
+
+        form input:read-only{
+            background-color: rgb(200, 200, 200);
+        }  
+
+        form input:read-only:focus{
+            border-bottom: 0;
+        }
+
+        label{
+            text-transform: capitalize;
+            text-align: left !important;
+            margin: 5px 10px 5px 0;
+            width: 100%;
+            display: inline-block;
+            line-height: 20px;
+        }
+        table{
+            border-radius: 5px;
+        }
+        table td,th,tr{
+            padding: 10px !important;
+            min-width: 20px !important;
+        }   
+        #contenedor{
+            width: 100%;
+            display: flex;
+            flex-direction: row; 
+            justify-content: center;
+        }
+
+        .saveClient{
+            margin: 20px 20px 20px 0px;
+            width:130px;
+        }
+
+        .divtop{
+            padding: 10px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            top: 0;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: left !important;
+        }
+
+        .NoResults{
+            width: 100%;
+            padding: 100px;
+            position: relative;
+            background-color: rgb(241, 241, 187) ;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+    </style>
+
+@stop
+
 @section('content')
-
-<!---->
+	<div id="contenedor">
+		<div id="Input"></div>
+		<div id="Sales"></div>
 	</div>
-	 <nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-	  	<div class="navbar-header">
-      		<a class="navbar-brand" href="#">GesCliAdm</a>
-    	</div>
-	    <ul class="nav navbar-nav navbar-right">
-	
-	      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-	      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-	
-	       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
-	      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	<script type="text/javascript">
+		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
+        var ventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
+        
+        CreateForm('#Input',cliente,undefined);
 
-	    </ul>
-	  </div>
-	</nav> 
-<!---->
-
+        if(ventas.length != 0){
+            CreateTable('#Sales',ventas,undefined);
+        }else{
+            var div = $('<div class="NoResults"><h3>No hay ventas disponibles</h3></div>')
+                        .appendTo('#Sales');
+            CreateElement(div,'div','Ventas',{class:'divtop'})
+        }
+	    
+	    
+	    $('input[name="cif/nif"]').prop('readonly',true);
+	    CreateElement('#Input',"div","Información de Cliente",{class:"divtop"})
+	</script>
 @stop

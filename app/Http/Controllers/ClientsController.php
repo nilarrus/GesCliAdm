@@ -37,8 +37,6 @@ class ClientsController extends Controller
     public function show($id){
         $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
         $ventas = Venta::where('Id_Cliente',$id)->get();
-
-
         return view('clients.cliente', compact('cliente','ventas'));
     }
 }

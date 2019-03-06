@@ -116,7 +116,7 @@
     <script>
         var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
         var ventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
-    
+        console.log(cliente)
         $(document).ready(function(){
             var data = filterData(ventas);
             if(data[0].length === 0){

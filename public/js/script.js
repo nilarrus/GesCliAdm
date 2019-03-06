@@ -30,8 +30,9 @@ function createItem(parent,middleparent,middlechild,Params,child,values){
                 createElement(intermediate,child,element);
             }
         }
-
+        
         if(Params != undefined && typeof Params == "object"){
+            
             setParams(intermediate,getParams(Params,intermediate.data()));
         }
     })
@@ -142,14 +143,18 @@ function createDashboard(parent,data){
     
 }
 
+function createTable(parent,params,data){
+
+}
+
 function createSelectedElement(parent,child,texto,params){
     var element = $('<' + child + '>')
         .attr(params)
         .text(texto)
         .appendTo(parent)
-
     return element;
 }
+
 $(document).ready(function(){
    // filterData(clientes);
 
@@ -160,7 +165,5 @@ $(document).ready(function(){
     $('#GenerarError').click(function(){   
         $('.Error').html("");
         $('.Error').toggle().prepend($('<img>',{id:'theImg',src:'img/exclamacion.png',width:'40px'})).append("Esto es un mensaje de Error");
-
-
     });
 });

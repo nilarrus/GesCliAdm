@@ -13,7 +13,7 @@ function CreateTable(parent,data,params){
     var Tbody = CreateElement(Table,"tbody",undefined,undefined);
     var TRhead;
     var control=false;
-    
+
     Keys.forEach(function(element){
         if(control===false){
             TRhead=CreateElement(Thead,"tr",undefined,undefined);
@@ -37,6 +37,13 @@ function CreateTable(parent,data,params){
     });
 }
 
+/**
+ * 
+ * @param {*} parent Elemento al que añadiremos el componente que vamos a crear. Se debe pasar una string con un formato parecido a: '#id','.class',etc...
+ * @param {*} element String que contiene el tipo de elemento que deseamos crear: 'div','p','button','form',etc...
+ * @param {*} text String con un texto que se printará en el elemento creado.
+ * @param {*} params Objeto en formato JSON que contendrá los diversos atributos que dseamos que tenga el componente (class:'clase',name:'nombre',etc...)
+ */
 function CreateElement(parent,element,text,params){
     if(params===undefined || params === null){
         params={};
@@ -48,11 +55,12 @@ function CreateElement(parent,element,text,params){
     return element;
 }
 
+//Función que recibe un array y devuelve uno nuevo con los elementos únicos. Si se repiten elimina los repetidos para dejar uno solo.
 function onlyUnique(value, index, self) { 
     return self.indexOf(value) === index;
 }
 
-//Función para convertir un json en dos arrays, uno que contiene las keys y otro que contiene los valores
+//Función que recibe un JSON y lo convierte en dos arrays, uno que contiene las keys y otro que contiene los valores
 function filterData(result){
     //var result = result.data;
     var keys = [];

@@ -19,7 +19,7 @@ class ClientsController extends Controller
     }
 
     public function edit(Request $request, $id){
-        Cliente::where('id',$id)
+        Cliente::findOrFail($id)
             ->update([
                 'nombre' => $request->input('nombre'),
                 'direccion' => $request->input('direccion'),

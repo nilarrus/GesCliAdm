@@ -1,18 +1,19 @@
 @extends('home')
+
+
 @section('ownCSS')
 
     <style>
-    	#Input,#Sales{
-    		margin: 15px;
-    	}
-        #Input{
+        #cliente,#ventas{
+            margin: 15px;
+        }
+        .datosCliente{
             padding: 60px 60px 10px 60px;
             background-color: rgb(241, 241, 187) ;
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
             position: relative;
-            width: 40%;
         }
-        #Input form{
+        .datosCliente form{
             width: 300px;
             clear: both;
             text-align: left !important;
@@ -66,7 +67,7 @@
             padding: 10px !important;
             min-width: 20px !important;
         }   
-        #contenedor{
+        .contenido{
             width: 100%;
             display: flex;
             flex-direction: row; 
@@ -74,8 +75,7 @@
         }
 
         .saveClient{
-            margin: 20px 20px 20px 0px;
-            width:130px;
+            margin:20px;
         }
 
         .divtop{
@@ -103,37 +103,38 @@
 @stop
 
 @section('content')
-	<div id="contenedor">
-		<div id="Input">
-		</div>
-		<div id="Sales">
-		</div>
-	</div>
-	<script type="text/javascript">
-		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
-	    var ventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
+    <div class="contenido">
+        <div id="cliente">
+            <div class="datosCliente"></div>
+        </div>
 
-	    function CreateForm(parent,data,params){
-	    	var form=CreateElement(parent,"form",undefined,undefined);
-	    	var csrfVar = $('meta[name="csrf-token"]').attr('content');
-    		form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
-	    	data.forEach(function(elements){
-	    		for(item in elements){
-	    			if(item==="id"){
-	    				form.attr({"method":"post","action":"/clients/"+elements[item]})
-	    			}
-	    			var label=CreateElement(form,"label",item,undefined);
-	    			CreateElement(form,"input",undefined,{'value':elements[item],name:item});
+        <div id="ventas">
+            <div class="datosventas"></div>
+            <table id="tablaventas"></table>
+        </div>
+    </div>
+    <script>
+        var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
+        var ventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
+    
+        $(document).ready(function(){
+            var data = filterData(ventas);
+            if(data[0].length === 0){
+                var div = $('<div class="NoResults"><h3>No hay ventas disponibles</h3></div>')
+                    .appendTo('.datosventas');
+                createSelectedElement(div,'div','Ventas',{class:'divtop'})
+            }else{
+                createItem('#tablaventas',["thead",'tr'],undefined,undefined,"th",data[0]);
+                createItem('#tablaventas',['tbody'],["tr"],["class=clickable","data-href=/ventas/"],"td",data[1]);
 
-	    		}
-	    		CreateElement(form,"button","Modificar Cliente",{class:"btn btn-primary saveClient"});
-	    	})
-	    }
-
-
-	    CreateForm('#Input',cliente,undefined);
-	    CreateTable('#Sales',ventas,undefined);
-	    $('input[name="cif/nif"]').prop('readonly',true);
-	    CreateElement('#Input',"div","Información de Cliente",{class:"divtop"})
-	</script>
+                $(".clickable").click(function() {
+                    window.location = $(this).data("href");
+                });
+            }
+        
+            createDashboard('.datosCliente',cliente);
+            $('input[name="cif/nif"]').prop('readonly', true);
+            
+        });
+    </script>
 @stop

@@ -1,18 +1,3 @@
-function createStructure(keys,values){
-    var table = $('<table>').appendTo('#app');
-    createItem(table,["thead",'tr'],undefined,undefined,"th",keys);
-    createItem(table,['tbody'],["tr"],["class=clickable","data-href=clientes/"],"td",values);
-    //createItem("#app",['div','ul'],undefined,["class=title"],"li",keys);
-    //createItem("#app",['div'],["ul"],["class=clickable","data-href=clientes/"],"li",values);
-
-    //Función que convierte los elementos con la clase pasada por parámetro en clickable y el link será el data-href
-    jQuery(document).ready(function($) {
-        $(".clickable").click(function() {
-            window.location = $(this).data("href");
-        });
-    });
-}
-
 /**
  * 
  * @param {*} parent Elemento existente en el HTML bajo el que se creará la estructura
@@ -47,11 +32,7 @@ function createItem(parent,middleparent,middlechild,Params,child,values){
         }
 
         if(Params != undefined && typeof Params == "object"){
-            try{
-                setParams(intermediate,getParams(Params,intermediate.data()));
-            }catch(err){
-                console.log(err.message);
-            } 
+            setParams(intermediate,getParams(Params,intermediate.data()));
         }
     })
 }
@@ -119,31 +100,56 @@ function onlyUnique(value, index, self) {
 
 //Función para convertir un json en dos arrays, uno que contiene las keys y otro que contiene los valores
 function filterData(result){
-    var listado = result;
-    /*
-    if(result.data.childs){
-        var listado = result.data.childs;
-    }else{
-        var listado = result.data;
-    }*/
-    
+    //var result = result.data;
     var keys = [];
     var values = [];
-    listado.forEach(function(items){
-        var list = [];
-        for(item in items){
-            keys.push(item);
-            list.push(items[item]);
-        };
-        values.push(list);
-        
-    });
+        result.forEach(function(items){
+            var list = [];
+            for(item in items){
+                keys.push(item);
+                list.push(items[item]);
+            };
+            values.push(list);
+            
+        });
 
-    keys = keys.filter(onlyUnique);
-
-    createStructure(keys,values);
+    keys = keys.filter(onlyUnique); 
+    return [keys,values];
 }
 
+function createDashboard(parent,data){
+    var form = $('<form>');
+    var csrfVar = $('meta[name="csrf-token"]').attr('content');
+    form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
+    form.append('<input type="hidden" name="_method" value="PUT">');
+    data.forEach(function(elements){
+        for(element in elements){
+            if(element === "id"){
+                form.attr({
+                        method: "post",
+                        action: "/clients/" + elements[element]
+                    })
+                    .appendTo(parent)
+            }else{
+                var label = createSelectedElement(form,'label',element+': ',{for: element});
+                createSelectedElement(label,'input',undefined,{ type: 'text', name: element, value: elements[element], placeholder: element});
+            }
+        }
+    });
+
+        createSelectedElement(form,'button','Guardar',{class: "btn btn-primary saveClient"});
+        createSelectedElement(parent,'div','Información del cliente',{class:'divtop'});
+    
+}
+
+function createSelectedElement(parent,child,texto,params){
+    var element = $('<' + child + '>')
+        .attr(params)
+        .text(texto)
+        .appendTo(parent)
+
+    return element;
+}
 $(document).ready(function(){
    // filterData(clientes);
 

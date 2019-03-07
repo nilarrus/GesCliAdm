@@ -43,7 +43,7 @@
 	</head>
 	<body>
 		@include('navbar')
-		<button id="GenerarError">Generar Error</button>
+		
 		<div class="Error"></div>
 		<div class="container flex-center">
 			

@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<script src="{{asset('js/Components.js')}}"></script>
+	
 	@yield('ownCSS')
 	
 	<title></title>
@@ -42,12 +43,14 @@
 	</head>
 	<body>
 		@include('navbar')
-		
+		<button id="GenerarError">Generar Error</button>
+		<div class="Error"></div>
 		<div class="container flex-center">
-			<button id="GenerarError">Generar Error</button>
-			<div class="Error" ></div>
+			
+			
 			@yield('content')
 			@yield('modal')
 		</div>
 	</body>
+	<script src="{{asset('js/Validator.js')}}"></script>
 	</html>

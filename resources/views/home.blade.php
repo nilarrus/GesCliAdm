@@ -43,8 +43,8 @@
 	</head>
 	<body>
 		@include('navbar')
-		
-		<div class="Error"></div>
+		<div class="ErrorContainer"></div>
+		<!--<div class="Error"></div>-->
 		<div class="container flex-center">
 			
 			

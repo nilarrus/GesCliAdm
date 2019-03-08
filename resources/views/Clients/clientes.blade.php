@@ -21,9 +21,13 @@
        
        CreateTable("#ClientsTable",clientes,undefined);
 
+       $('.clickable').each(function(){
+            $(this).attr("data-href","/clients/"+$(this).attr("id"));
+       })
+
        $('.clickable').click(function(){
             window.location=$(this).data('href');
-       })
+       });
     </script>
 @stop
 

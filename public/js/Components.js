@@ -28,7 +28,7 @@ function CreateTable(parent,data,params){
         var control=false;
         items.forEach(function(item){
             if(control===false){
-                TRbody=CreateElement(Tbody,"tr",undefined,{"class":"clickable","data-href":'/clients/'+item});
+                TRbody=CreateElement(Tbody,"tr",undefined,{"class":"clickable","id":item});
                 control=true;
             }else{
             CreateElement(TRbody,"td",item,undefined); 
@@ -86,7 +86,7 @@ function filterData(result){
  * @param {*} params Objeto con elementos clave valor, por ejemplo: {class:'container',name:'elemento1'}
  */
 function CreateForm(parent,data,params){
-    var form=CreateElement(parent,"form",undefined,undefined);
+    var form=CreateElement(parent,"form",undefined,{id:"form"});
     var csrfVar = $('meta[name="csrf-token"]').attr('content');
     form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
     form.append('<input type="hidden" name="_method" value="PUT">');

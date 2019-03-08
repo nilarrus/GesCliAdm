@@ -124,6 +124,16 @@
 	    
 	    
 	    $('input[name="cif/nif"]').prop('readonly',true);
-	    CreateElement('#Input',"div","Información de Cliente",{class:"divtop"})
+        CreateElement('#Input',"div","Información de Cliente",{class:"divtop"});
+
+        $('.clickable').each(function(){
+            $(this).attr("data-href","/ventas/"+$(this).attr("id"));
+        });
+
+        $('.clickable').click(function(){
+            window.location=$(this).data('href');
+        });
+
+        
 	</script>
 @stop

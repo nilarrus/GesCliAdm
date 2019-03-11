@@ -116,6 +116,10 @@
 
         if(ventas.length != 0){
             CreateTable('#Sales',ventas,undefined);
+            
+            $('.clickable').click(function(){
+            window.location=$(this).data('href');
+       })
         }else{
             var div = $('<div class="NoResults"><h3>No hay ventas disponibles</h3></div>')
                         .appendTo('#Sales');

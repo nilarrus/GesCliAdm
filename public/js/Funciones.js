@@ -5,7 +5,7 @@ function Error(){
 	if(VarControlError==0){
 		$(DivError).attr('disabled');
 	}else{
-		$('input').create("Hijoputa")
+		$('input').create("hello")
 	}
 	
 }

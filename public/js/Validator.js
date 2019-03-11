@@ -3,7 +3,7 @@ $('#form').submit(function(e){
     e.preventDefault();
     console.log("presubmit")
     if(validate()){
-        //$('#form')[0].submit();
+        $('#form')[0].submit();
         console.log("submit")
     }
 });

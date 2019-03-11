@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
                 'Direccion' => str_random(15),
                 'provincia' => str_random(20),
                 'Localidad' => str_random(15),
-                'CIF/NIF' => str_random(15),
-                'Email' => "usuario@localhost",
-                'Telefono' => rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9),
+                'CIF/NIF' => self::getNIF(),
+                'Email' => "usuario@localhost.com",
+                'Telefono' => rand(),
                 'CP' => rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9),
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'),
@@ -42,4 +42,14 @@ class DatabaseSeeder extends Seeder
             ]);
         }
     }
+
+    function getNIF(){
+        $number = mt_rand(10000000, 99999999);
+
+        return($number.self::LetraNIF($number));
+        
+    }
+    function LetraNIF($dni) { 
+        return $letraNif= substr ("TRWAGMYFPDXBNJZSQVHLCKEO", $dni % 23, 1); 
+    } 
 }

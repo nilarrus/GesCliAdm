@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cliente;
 use App\Venta;
+use App\Archivo;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class ClientsController extends Controller
 {
@@ -34,9 +37,50 @@ class ClientsController extends Controller
         return redirect()->back();
     }
 
-    public function show($id){
+    public function showClient($id){
         $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
         $ventas = Venta::where('Id_Cliente',$id)->get();
         return view('clients.detalle_cli', compact('cliente','ventas'));
+    }
+
+    public function showSale($id){
+        $venta = Venta::where('id',$id)->first();
+        $archivos = Archivo::where('Id_Venta',$id)->get(["id","Tipo","Archivo","Id_Venta","updated_at"]);
+        echo $archivos;
+        return view('clients.detalle_ven',compact('venta','archivos'));
+    }
+
+    public function upload(Request $request,$id){
+        if($request->hasFile("archivo")){
+            $file = $request->file('archivo');
+            $type = $request->Input("tipo");
+
+            $filename = $id . "_" . $type . "_" . date('YmdHis', time()) . "." . $file->getClientOriginalExtension();
+
+            Storage::disk('public')->put($filename,file_get_contents($file),'public');
+
+            try{
+                $newFile = new Archivo;
+                $newFile->Tipo = $type;
+                $newFile->Archivo = $filename;
+                $newFile->Id_Venta = $id;
+                $newFile->save();
+            }catch(Exception $e){
+                return "Error";
+            }
+
+            return "Correcto";
+            
+        }else{
+            return "No lo tiene";
+        }
+    }
+
+    public function download(Request $request){
+        if(request()->ajax()){
+            //$headers = array('Content-Type'=> 'application/pdf');
+            //$pathToFile = '.\app\4_factura_20190310055837.pdf';
+            //return response()->download(storage_path($pathToFile),'4_factura_20190310053025.pdf',$headers);
+        }
     }
 }

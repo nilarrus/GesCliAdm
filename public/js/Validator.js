@@ -2,24 +2,64 @@
 $('#form').submit(function(e){
     e.preventDefault();
     console.log("presubmit")
-    if(validate()){
+  
+    if(validate() && checkNulls()){
         $('#form')[0].submit();
         console.log("submit")
     }
 });
 
+$( "input[type='text']" ).change(function() {
+	$(this).css("border","1px solid rgba(0,0,0,0.4");
+	checkNulls();
+    validate();
+});
+
 //Función que valida si un formulario es correcto o no
 function validate(){
+    var control = true;
     var email = $("input[name='email']");
-    if(!validateEmail(email.val())){
-        createError("El correo tiene un formato incorrecto.")
-        return false;
-    }else if(!validateNumber($("input[name='telefono']").val())){
-        createError("El teléfono tiene que tener 9 dígitos.")
+    var telefono = $("input[name='telefono']");
+    var dni = $("input[name='CIF/NIF']");
+    if(!validateEmail(email.val()) && email.val() != ""){
+        email.css('border','1px solid red');
+        createError("El correo tiene un formato incorrecto.");
+        control = false;
+    }
+    if(!validateNumber(telefono.val())  && telefono.val() != ""){
+        telefono.css('border','1px solid red');
+        createError("El teléfono tiene que tener 9 dígitos.");
+        control = false;
+    }
+    if(!validateCIF(dni.val())  && dni.val() != ""){
+		dni.css('border','1px solid red');
+		createError("CIF/NIF incorrecto");
+        control = false;
+    }
+    
+    if(control){
+        return true;
+    }else{
         return false;
     }
+    
+}
 
-    return true;
+function checkNulls(){
+    var control = true;
+    $('input').each(function(){
+        if($(this).val() === ""){
+            $(this).css('border','1px solid red');
+            control = false;
+        }
+    })
+
+    if(control){
+        return true;
+    }else{
+        createError("Todos los campos son obligatorios.");
+        return false;
+    }
 }
 
 //Función para validar un email, recibira una string con el email y devolverá un true o un false
@@ -32,4 +72,83 @@ function validateEmail(email){
 function validateNumber(number){
     var re = /\d{9}/;
     return re.test(number);
+}
+
+
+function validateDNI(dni)
+{
+	var lockup = 'TRWAGMYFPDXBNJZSQVHLCKE';
+	var valueDni=dni.substr(0,dni.length-1);
+	var letra=dni.substr(dni.length-1,1).toUpperCase();
+ 
+	if(lockup.charAt(valueDni % 23)==letra){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function validateCIF(cif)
+{
+	//Quitamos el primer caracter y el ultimo digito
+	var valueCif=cif.substr(1,cif.length-2);
+ 
+	var suma=0;
+ 
+	//Sumamos las cifras pares de la cadena
+	for(i=1;i<valueCif.length;i=i+2)
+	{
+		suma=suma+parseInt(valueCif.substr(i,1));
+	}
+ 
+	var suma2=0;
+ 
+	//Sumamos las cifras impares de la cadena
+	for(i=0;i<valueCif.length;i=i+2)
+	{
+		result=parseInt(valueCif.substr(i,1))*2;
+		if(String(result).length==1)
+		{
+			// Un solo caracter
+			suma2=suma2+parseInt(result);
+		}else{
+			// Dos caracteres. Los sumamos...
+			suma2=suma2+parseInt(String(result).substr(0,1))+parseInt(String(result).substr(1,1));
+		}
+	}
+ 
+	// Sumamos las dos sumas que hemos realizado
+	suma=suma+suma2;
+ 
+	var unidad=String(suma).substr(1,1)
+	unidad=10-parseInt(unidad);
+ 
+	var primerCaracter=cif.substr(0,1).toUpperCase();
+ 
+	if(primerCaracter.match(/^[FJKNPQRSUVW]$/))
+	{
+		//Empieza por .... Comparamos la ultima letra
+		if(String.fromCharCode(64+unidad).toUpperCase()==cif.substr(cif.length-1,1).toUpperCase())
+			return true;
+	}else if(primerCaracter.match(/^[XYZ]$/)){
+		//Se valida como un dni
+		var newcif;
+		if(primerCaracter=="X")
+			newcif=cif.substr(1);
+		else if(primerCaracter=="Y")
+			newcif="1"+cif.substr(1);
+		else if(primerCaracter=="Z")
+			newcif="2"+cif.substr(1);
+		return validateDNI(newcif);
+	}else if(primerCaracter.match(/^[ABCDEFGHLM]$/)){
+		//Se revisa que el ultimo valor coincida con el calculo
+		if(unidad==10)
+			unidad=0;
+		if(cif.substr(cif.length-1,1)==String(unidad))
+			return true;
+	}else{
+        //Se valida como un dni
+		return validateDNI(cif);
+	}
+	return false;
 }

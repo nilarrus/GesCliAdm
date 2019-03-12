@@ -2,6 +2,7 @@
 $('#form').submit(function(e){
     e.preventDefault();
     console.log("presubmit")
+  
     if(validate() && checkNulls()){
         $('#form')[0].submit();
         console.log("submit")

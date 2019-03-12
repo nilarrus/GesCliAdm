@@ -1,36 +1,32 @@
 @extends('home')
 
 @section('content')
-	<style>
+<style>
 	.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: red;
-  cursor: inherit;
-  display: block;
-}
-.file-input-label {
-	padding: 0px 10px;
-	display: table-cell;
-	vertical-align: middle;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-input[readonly] {
-  background-color: white !important;
-  cursor: text !important;
-}
+		line-height: 2.15;
+		position: absolute;
+		overflow: hidden;
+		right: 0;
+		top: 0;
+		border-radius: 0px;
+	}
+	.btn-file input[type=file] {
+		position: absolute;
+		top: 0;
+		right: 0;
+		min-width: 100%;
+		min-height: 100%;
+		font-size: 100px;
+		text-align: right;
+		opacity: 0;
+		cursor: inherit;
+		display: block;
+	}
+
+	th{
+		position: relative !important;
+		border-bottom: 0;
+	}
 </style>
 	<div class="sale">
 		<form id="form2" enctype="multipart/form-data">
@@ -38,16 +34,14 @@ input[readonly] {
 			<input type="file" name="archivo" id="archivo" tipo="factura" >
 			<input type="hidden" name="tipo" value="factura">
 			<button id="button-submit">Enviar</button>
+			
+
 		</form>
-		<br>
-		<span class="file-input btn btn-primary btn-file">
-                Browse... <input type="file" multiple>
-            </span>
 	</div>
 	
 	<script>
 
-		$('#archivo').change(function(){
+		$('.fileInput').change(function(){
 			var form = $('<form action="/uploadFile/{{ $venta->id }}" enctype="multipart/form-data" method="POST" id="query"></form>').appendTo(".sale");
 			var csrfVar = $('meta[name="csrf-token"]').attr('content');
     		form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
@@ -57,12 +51,19 @@ input[readonly] {
 			var newFile = $(this).clone().appendTo(form);
 			form.submit();
 		});
-		var venta = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
-		var ventas = [];
-		ventas.push(venta);
-		console.log(ventas);
+
+		var Datos = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
+		var Ventas=[];
+		Ventas.push(Datos);
 		var archivos = {!! json_encode($archivos->toArray(), JSON_HEX_TAG) !!};
-		CreateTable('.sale',archivos)
+		CreateTable(".sale",Ventas,undefined);		
+		SimpleTable(".sale", "Factura", {id:"Table_Fac"},archivos);
+		SimpleTable(".sale","Albarán",{id:"Table_Alb"},archivos);
+		SimpleTable(".sale","Pressupost",{id:"Table_Pre"},archivos);
+		SimpleTable(".sale","Comanda Pro.",{id:"Table_Pro"},archivos);
+		SimpleTable(".sale","Comanda Cli.",{id:"Table_Cli"},archivos);
+
+
 		$('#form2').submit(function(e){
 			e.preventDefault();
 			sendPost();
@@ -104,19 +105,6 @@ input[readonly] {
 			})
 		}
 
-		$(document).ready(function(){
-			archivos.forEach(function(elements){
-				console.log(elements.Archivo)
-				var url = '{{ asset("storage/:url") }}';
-				url = url.replace(':url', elements.Archivo);
-				$('<button>')
-					.attr({'class':'imgbutton'})
-					.text('Descargar')
-					.click(function(e){
-						window.open(url,'_blank');
-					})
-					.appendTo('.sale');
-			})
-		})
+
 	</script>
 @stop

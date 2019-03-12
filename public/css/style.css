@@ -144,3 +144,8 @@ div.ErrorContainer{
   }
 
 }
+
+.ExpandBtn{
+    width: 100px !important;
+    border-radius: 0px !important;
+}

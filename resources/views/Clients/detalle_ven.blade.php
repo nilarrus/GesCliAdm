@@ -8,15 +8,28 @@
 			<input type="file" name="archivo">
 			<input type="hidden" name="tipo" value="factura">
 			<button id="button-submit">Enviar</button>
+			
+
 		</form>
+
+
 		<br>
 	</div>
 	
 	<script>
 
-	
+		var Datos = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
+		var Ventas=[];
+		Ventas.push(Datos);
 		var archivos = {!! json_encode($archivos->toArray(), JSON_HEX_TAG) !!};
-		CreateTable('.sale',archivos)
+		CreateTable(".sale",Ventas,undefined);		
+		SimpleTable(".sale", "Factura", {id:"Table_Fac"},archivos);
+		SimpleTable(".sale","Albarán",{id:"Table_Alb"},archivos);
+		SimpleTable(".sale","Pressupost",{id:"Table_Pre"},archivos);
+		SimpleTable(".sale","Comanda Pro.",{id:"Table_Pro"},archivos);
+		SimpleTable(".sale","Comanda Cli.",{id:"Table_Cli"},archivos);
+
+
 		$('#form2').submit(function(e){
 			e.preventDefault();
 			sendPost();
@@ -58,19 +71,6 @@
 			})
 		}
 
-		$(document).ready(function(){
-			archivos.forEach(function(elements){
-				console.log(elements.Archivo)
-				var url = '{{ asset("storage/:url") }}';
-				url = url.replace(':url', elements.Archivo);
-				$('<button>')
-					.attr({'class':'imgbutton'})
-					.text('Descargar')
-					.click(function(e){
-						window.open(url,'_blank');
-					})
-					.appendTo('.sale');
-			})
-		})
+
 	</script>
 @stop

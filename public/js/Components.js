@@ -35,6 +35,37 @@ function CreateTable(parent,data,params){
             }
         });
     });
+
+
+}
+
+function SimpleTable(parent,text,attr,data){
+        console.log(attr);
+        var Split=SplitData(data,text);
+        var Tab=CreateElement(parent,"Table",undefined,attr);
+        var Tr=CreateElement(Tab,"tr");
+        CreateElement(Tr,"th",text,{colspan:2});
+        CreateElement(Tr,"th","Añadir "+text, {class:"btn btn-primary ExpandBtn"});
+       
+        Split.forEach(function(elements){
+            var NewTr=CreateElement(Tab,"tr");
+            CreateElement(NewTr,"td",elements.Archivo);
+            CreateElement(NewTr,"td",elements.updated_at);
+        });
+        
+
+}
+
+function SplitData(data,type){
+    var SplitArray=[];
+    data.forEach(function(items){
+
+        if(items.Tipo.toLowerCase()===type.toLowerCase()){
+            SplitArray.push(items);
+        }
+
+    })
+    return SplitArray;
 }
 
 /**

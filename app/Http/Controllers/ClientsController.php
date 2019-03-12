@@ -44,7 +44,7 @@ class ClientsController extends Controller
     }
 
     public function showSale($id){
-        $venta = Venta::where('id',$id)->first(['id','Id_Cliente']);
+        $venta = Venta::where('id',$id)->first();
         $archivos = Archivo::where('Id_Venta',$id)->get(["id","Tipo","Archivo","Id_Venta","updated_at"]);
         return view('clients.detalle_ven',compact('venta','archivos'));
     }

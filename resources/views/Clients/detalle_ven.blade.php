@@ -32,36 +32,35 @@
 		margin: 10px;
 	}
 
-	span{
+	th span{
 		width: 150px;
 	}
-</style>
-	<div class="sale">
-		<form id="form2" enctype="multipart/form-data">
-			{{ csrf_field() }}
-			<input type="file" name="archivo" id="archivo" tipo="factura" >
-			<input type="hidden" name="tipo" value="factura">
-			<button id="button-submit">Enviar</button>
-			
+	.sale{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 
-		</form>
-	</div>
+	tr:first-child:hover{
+		background-color: initial;
+		color: inherit;
+		cursor: context-menu;
+	}
+</style>
+	<div class="sale"></div>
 	
 	<script>
-		$('.btn-file :file').on('fileselect',function(){
-			console.log("archivo seleccionado")
-		});
-		$('.btn-file :file').change(function(){
-			console.log("hola")
+		$(document).on('change', '.btn-file :file', function() {
 			var form = $('<form action="/uploadFile/{{ $venta->id }}" enctype="multipart/form-data" method="POST" id="query"></form>').appendTo(".sale");
 			var csrfVar = $('meta[name="csrf-token"]').attr('content');
-    		form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
+			form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
 			var file = $(this).prop('files')[0];
 			var tipo = $(this).attr("tipo");
 			CreateElement(form,"input",undefined,{"type":"hidden","name":"tipo","value":tipo});
 			var newFile = $(this).clone().appendTo(form);
 			form.submit();
-		});
+		})
 
 		var Datos = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
 		var Ventas=[];
@@ -70,7 +69,7 @@
 		CreateTable(".sale",Ventas,undefined);
 		var tab=CreateElement(".sale","Table",undefined,undefined);	
 		SimpleTable(tab, "Factura", {id:"Table_Fac"},archivos);
-		SimpleTable(tab,"Albarán",{id:"Table_Alb"},archivos);
+		SimpleTable(tab,"Albaran",{id:"Table_Alb"},archivos);
 		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);
 		SimpleTable(tab,"Pedido Pro.",{id:"Table_Pro"},archivos);
 		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);

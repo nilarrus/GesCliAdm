@@ -19,6 +19,5 @@ function setTimer(){
         var errorContainer = $('.ErrorContainer');
         errorContainer.hide();
         errorContainer.empty();
-        global_errorList = [];
 	}, 5000);
 }

@@ -44,9 +44,8 @@ class ClientsController extends Controller
     }
 
     public function showSale($id){
-        $venta = Venta::where('id',$id)->first();
+        $venta = Venta::where('id',$id)->first(['id','Id_Cliente']);
         $archivos = Archivo::where('Id_Venta',$id)->get(["id","Tipo","Archivo","Id_Venta","updated_at"]);
-        echo $archivos;
         return view('clients.detalle_ven',compact('venta','archivos'));
     }
 
@@ -69,7 +68,7 @@ class ClientsController extends Controller
                 return "Error";
             }
 
-            return "Correcto";
+            return redirect()->back();
             
         }else{
             return "No lo tiene";

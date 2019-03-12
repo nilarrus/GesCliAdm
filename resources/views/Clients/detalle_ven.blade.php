@@ -35,16 +35,17 @@
 	span{
 		width: 150px;
 	}
+	h1{
+		text-align: left;
+	}
 </style>
 	<div class="sale">
-		<form id="form2" enctype="multipart/form-data">
-			{{ csrf_field() }}
-			<input type="file" name="archivo" id="archivo" tipo="factura" >
-			<input type="hidden" name="tipo" value="factura">
-			<button id="button-submit">Enviar</button>
-			
-
-		</form>
+		<div class="sale-in">
+			<h1>Información:</h1>
+		</div>
+		<div class="sale-tabs">
+			<h1>Archivos:</h1>
+		</div>
 	</div>
 	
 	<script>
@@ -67,8 +68,8 @@
 		var Ventas=[];
 		Ventas.push(Datos);
 		var archivos = {!! json_encode($archivos->toArray(), JSON_HEX_TAG) !!};
-		CreateTable(".sale",Ventas,undefined);
-		var tab=CreateElement(".sale","Table",undefined,undefined);	
+		CreateTable(".sale-in",Ventas,undefined);
+		var tab=CreateElement(".sale-tabs","Table",undefined,undefined);	
 		SimpleTable(tab, "Factura", {id:"Table_Fac"},archivos);
 		SimpleTable(tab,"Albarán",{id:"Table_Alb"},archivos);
 		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);

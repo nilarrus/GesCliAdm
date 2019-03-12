@@ -45,7 +45,7 @@ function SimpleTable(parent,text,attr,data){
         var Tr=CreateElement(Tab,"tr");
         var Th = CreateElement(Tr,"th",text,{colspan:2});
         var Span = CreateElement(Th,"span","Añadir "+text, {class:"file-input btn btn-primary btn-file"});
-        CreateElement(Span,"input",undefined,{"type":"file"})
+        CreateElement(Span,"input",undefined,{"type":"file",class:"fileInput"})
 
         Split.forEach(function(elements){
             var NewTr=CreateElement(Tab,"tr");

@@ -27,6 +27,9 @@
 		position: relative !important;
 		border-bottom: 0;
 	}
+	table{
+		margin: 10px;
+	}
 </style>
 	<div class="sale">
 		<form id="form2" enctype="multipart/form-data">

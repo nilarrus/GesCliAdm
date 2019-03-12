@@ -32,9 +32,10 @@
 		margin: 10px;
 	}
 
-	span{
+	th span{
 		width: 150px;
 	}
+<<<<<<< HEAD
 	h1{
 		text-align: left;
 	}
@@ -47,22 +48,34 @@
 			<h1>Archivos:</h1>
 		</div>
 	</div>
+=======
+	.sale{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	tr:first-child:hover{
+		background-color: initial;
+		color: inherit;
+		cursor: context-menu;
+	}
+</style>
+	<div class="sale"></div>
+>>>>>>> 90b77a0e5b7640abc3e6cedc5cd8cca884c9198c
 	
 	<script>
-		$('.btn-file :file').on('fileselect',function(){
-			console.log("archivo seleccionado")
-		});
-		$('.btn-file :file').change(function(){
-			console.log("hola")
+		$(document).on('change', '.btn-file :file', function() {
 			var form = $('<form action="/uploadFile/{{ $venta->id }}" enctype="multipart/form-data" method="POST" id="query"></form>').appendTo(".sale");
 			var csrfVar = $('meta[name="csrf-token"]').attr('content');
-    		form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
+			form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
 			var file = $(this).prop('files')[0];
 			var tipo = $(this).attr("tipo");
 			CreateElement(form,"input",undefined,{"type":"hidden","name":"tipo","value":tipo});
 			var newFile = $(this).clone().appendTo(form);
 			form.submit();
-		});
+		})
 
 		var Datos = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
 		var Ventas=[];
@@ -71,7 +84,7 @@
 		CreateTable(".sale-in",Ventas,undefined);
 		var tab=CreateElement(".sale-tabs","Table",undefined,undefined);	
 		SimpleTable(tab, "Factura", {id:"Table_Fac"},archivos);
-		SimpleTable(tab,"Albarán",{id:"Table_Alb"},archivos);
+		SimpleTable(tab,"Albaran",{id:"Table_Alb"},archivos);
 		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);
 		SimpleTable(tab,"Pedido Pro.",{id:"Table_Pro"},archivos);
 		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);

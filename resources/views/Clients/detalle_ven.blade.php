@@ -22,12 +22,13 @@
 		var Ventas=[];
 		Ventas.push(Datos);
 		var archivos = {!! json_encode($archivos->toArray(), JSON_HEX_TAG) !!};
-		CreateTable(".sale",Ventas,undefined);		
-		SimpleTable(".sale", "Factura", {id:"Table_Fac"},archivos);
-		SimpleTable(".sale","Albarán",{id:"Table_Alb"},archivos);
-		SimpleTable(".sale","Pressupost",{id:"Table_Pre"},archivos);
-		SimpleTable(".sale","Comanda Pro.",{id:"Table_Pro"},archivos);
-		SimpleTable(".sale","Comanda Cli.",{id:"Table_Cli"},archivos);
+		CreateTable(".sale",Ventas,undefined);
+		var tab=CreateElement(".sale","Table",undefined,undefined);	
+		SimpleTable(tab, "Factura", {id:"Table_Fac"},archivos);
+		SimpleTable(tab,"Albarán",{id:"Table_Alb"},archivos);
+		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);
+		SimpleTable(tab,"Pedido Pro.",{id:"Table_Pro"},archivos);
+		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);
 
 
 		$('#form2').submit(function(e){

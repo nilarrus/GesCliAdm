@@ -42,13 +42,13 @@ function CreateTable(parent,data,params){
 function SimpleTable(parent,text,attr,data){
         console.log(attr);
         var Split=SplitData(data,text);
-        var Tab=CreateElement(parent,"Table",undefined,attr);
-        var Tr=CreateElement(Tab,"tr");
+        //var Tab=CreateElement(parent,"Table",undefined,attr);
+        var Tr=CreateElement(parent,"tr");
         CreateElement(Tr,"th",text,{colspan:2});
         CreateElement(Tr,"th","Añadir "+text, {class:"btn btn-primary ExpandBtn"});
        
         Split.forEach(function(elements){
-            var NewTr=CreateElement(Tab,"tr");
+            var NewTr=CreateElement(parent,"tr");
             CreateElement(NewTr,"td",elements.Archivo);
             CreateElement(NewTr,"td",elements.updated_at);
         });

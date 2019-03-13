@@ -1,0 +1,10 @@
+Eric:
+-Una de la mayores dificultades la he encontrado al crear el componente, este debe ser algo mas bien generico y claro tiendo ha hacer algo demasiado especifico peró aunque ha costado, se ha podido hacer.
+-También me cuesta pensar en Jquery, me suele pasar que a veces me colapso un poco porque sigo pensando como si fuera puro JS.
+-Laravel aunque creo que no me supone tanta dificultad, hay cosas que me paso mas tiempo del que tendría.
+
+Rubén:
+-Un problema que me encuentro al trabajar en equipo es que si la o las personas llevan un ritmo más lento al mío, me agobio y me cuesta "frenar". 
+Uno de los puntos positivos que le veo es que me permite pararme, replantearme ciertas cosas y apoyarme más en mi compañero, así como ayudarle y avanzar juntos.
+-Mi primer problema con este proyecto ha sido que no he conseguido conectar desde un principio con la forma en la que se ha llevado y eso me ha provocado un exceso de dudas.
+Según voy avanzando voy cogiendo más el contexto del proyecto, pero me sigue faltan "un algo" que espero se solucione en siguientes sprints.

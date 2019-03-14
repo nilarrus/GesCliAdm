@@ -1,7 +1,6 @@
 Eric:
--Una de la mayores dificultades la he encontrado al crear el componente, este debe ser algo mas bien generico y claro tiendo ha hacer algo demasiado especifico peró aunque ha costado, se ha podido hacer.
--También me cuesta pensar en Jquery, me suele pasar que a veces me colapso un poco porque sigo pensando como si fuera puro JS.
--Laravel aunque creo que no me supone tanta dificultad, hay cosas que me paso mas tiempo del que tendría.
+-Este sprint al tener menos horas y un trabajo no muy abultado de lógica, ha pasado bastante bien.
+-Lo  bueno de tener a un compañero que sabe bastante es que hace que mis dudas se resuelvan de forma bastante eficiente, aunque a veces trabaja más rapido y me cuesta seguir el ritmo, pero después si hay algo que no se que es o que hace me ayuda a entenderlo.
 
 Rubén:
 -Un problema que me encuentro al trabajar en equipo es que si la o las personas llevan un ritmo más lento al mío, me agobio y me cuesta "frenar". 

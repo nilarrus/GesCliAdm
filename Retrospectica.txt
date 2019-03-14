@@ -3,7 +3,4 @@ Eric:
 -Lo  bueno de tener a un compañero que sabe bastante es que hace que mis dudas se resuelvan de forma bastante eficiente, aunque a veces trabaja más rapido y me cuesta seguir el ritmo, pero después si hay algo que no se que es o que hace me ayuda a entenderlo.
 
 Rubén:
--Un problema que me encuentro al trabajar en equipo es que si la o las personas llevan un ritmo más lento al mío, me agobio y me cuesta "frenar". 
-Uno de los puntos positivos que le veo es que me permite pararme, replantearme ciertas cosas y apoyarme más en mi compañero, así como ayudarle y avanzar juntos.
--Mi primer problema con este proyecto ha sido que no he conseguido conectar desde un principio con la forma en la que se ha llevado y eso me ha provocado un exceso de dudas.
-Según voy avanzando voy cogiendo más el contexto del proyecto, pero me sigue faltan "un algo" que espero se solucione en siguientes sprints.
+-En este sprint no he visto demasiados problemas, la verdad que se han echado en falta algunas horas porque no ha dado tiempo a desarrollar gran cosa, espero que para próximos sprints esto cambie.

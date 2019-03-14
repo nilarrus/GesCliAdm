@@ -23,17 +23,17 @@ function validate(){
     var dni = $("input[name='CIF/NIF']");
     if(!validateEmail(email.val()) && email.val() != ""){
         email.css('border','1px solid red');
-        createError("El correo tiene un formato incorrecto.");
+        createError("El correo tiene un formato incorrecto.", "mail");
         control = false;
     }
     if(!validateNumber(telefono.val())  && telefono.val() != ""){
         telefono.css('border','1px solid red');
-        createError("El teléfono tiene que tener 9 dígitos.");
+        createError("El teléfono tiene que tener 9 dígitos.","phone");
         control = false;
     }
     if(!validateCIF(dni.val())  && dni.val() != ""){
 		dni.css('border','1px solid red');
-		createError("CIF/NIF incorrecto");
+		createError("CIF/NIF incorrecto","nif");
         control = false;
     }
     
@@ -57,7 +57,7 @@ function checkNulls(){
     if(control){
         return true;
     }else{
-        createError("Todos los campos son obligatorios.");
+        createError("Todos los campos son obligatorios.","blank");
         return false;
     }
 }

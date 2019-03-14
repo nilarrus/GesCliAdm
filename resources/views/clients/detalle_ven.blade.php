@@ -83,5 +83,19 @@
 		SimpleTable(tab,"Pedido Pro.",{id:"Table_Pro"},archivos);
 		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);
 		
+		$('tbody tr').each(function(){
+            var estado = $(this).find('td').eq(1); 
+            console.log(estado)
+            if(estado.html() === "0"){
+                estado.html("")
+                CreateElement(estado,"div","Sin validar",{class:"notValidated"});
+            }else if(estado.html() === "1"){
+                estado.html("")
+                CreateElement(estado,"div","Validado",{class:"validated"});
+            }else if(estado.html() === "2"){
+                estado.html("")
+                CreateElement(estado,"div","En espera",{class:"waiting"});
+            }
+        })
 	</script>
 @stop

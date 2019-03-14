@@ -100,12 +100,6 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
-        .notValidated{
-            color: black;
-            min-width: 100px;
-            line-height: 30px;
-            border-radius: 4px;
-        }
     </style>
 
 @stop
@@ -145,18 +139,18 @@
             window.location=$(this).data('href');
         });
 
-        
-
         $('tbody tr').each(function(){
             var estado = $(this).find('td').eq(1); 
             console.log(estado)
             if(estado.html() === "0"){
                 estado.html("")
-                CreateElement(estado,"div","Sin validar",{class:"notValidated bg-warning border-warning"})
+                CreateElement(estado,"div","Sin validar",{class:"notValidated"});
             }else if(estado.html() === "1"){
-                console.log("asdff1");
+                estado.html("")
+                CreateElement(estado,"div","Validado",{class:"validated"});
             }else if(estado.html() === "2"){
-                console.log(2)
+                estado.html("")
+                CreateElement(estado,"div","En espera",{class:"waiting"});
             }
         })
 	</script>

@@ -1,6 +1,16 @@
 @extends('home')
 
 @section('content')
+
+<div class="sale">
+	<div class="sale-in">
+			<h1>Información:</h1>
+		</div>
+		<div class="sale-tabs">
+			<h1>Archivos:</h1>
+		</div>
+	</div>
+
 <style>
 	.btn-file {
 		line-height: 2.15;
@@ -35,19 +45,10 @@
 	th span{
 		width: 150px;
 	}
-<<<<<<< HEAD
 	h1{
 		text-align: left;
 	}
-</style>
-	<div class="sale">
-		<div class="sale-in">
-			<h1>Información:</h1>
-		</div>
-		<div class="sale-tabs">
-			<h1>Archivos:</h1>
-		</div>
-	</div>
+
 	.sale{
 		display: flex;
 		flex-direction: column;
@@ -65,7 +66,6 @@
 		text-align: center !important;
 	}
 </style>
-	<div class="sale"></div>
 	
 	<script>
 		$(document).on('change', '.btn-file :file', function() {

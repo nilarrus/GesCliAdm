@@ -48,7 +48,6 @@
 			<h1>Archivos:</h1>
 		</div>
 	</div>
-=======
 	.sale{
 		display: flex;
 		flex-direction: column;
@@ -63,7 +62,6 @@
 	}
 </style>
 	<div class="sale"></div>
->>>>>>> 90b77a0e5b7640abc3e6cedc5cd8cca884c9198c
 	
 	<script>
 		$(document).on('change', '.btn-file :file', function() {

@@ -35,6 +35,19 @@
 	th span{
 		width: 150px;
 	}
+<<<<<<< HEAD
+	h1{
+		text-align: left;
+	}
+</style>
+	<div class="sale">
+		<div class="sale-in">
+			<h1>Información:</h1>
+		</div>
+		<div class="sale-tabs">
+			<h1>Archivos:</h1>
+		</div>
+	</div>
 	.sale{
 		display: flex;
 		flex-direction: column;
@@ -75,8 +88,8 @@
 		var Ventas=[];
 		Ventas.push(Datos);
 		var archivos = {!! json_encode($archivos->toArray(), JSON_HEX_TAG) !!};
-		CreateTable(".sale",Ventas,undefined);
-		var tab=CreateElement(".sale","Table",undefined,undefined);	
+		CreateTable(".sale-in",Ventas,undefined);
+		var tab=CreateElement(".sale-tabs","Table",undefined,undefined);	
 		SimpleTable(tab, "Factura", {id:"Table_Fac"},archivos);
 		SimpleTable(tab,"Albaran",{id:"Table_Alb"},archivos);
 		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);

@@ -125,7 +125,7 @@ div.ErrorContainer{
     float: right;
     margin: 5px;
     z-index: 99999;
-    position: absolute;
+    position: fixed;
     right: 10%;
     display: none;
 }
@@ -148,4 +148,28 @@ div.ErrorContainer{
 .ExpandBtn{
     width: 100px !important;
     border-radius: 0px !important;
+}
+
+.notValidated{
+    min-width: 100px;
+    line-height: 30px;
+    border-radius: 4px;
+    background-color: #dc3545 !important;
+    color: white;
+}
+
+.validated{
+    min-width: 100px;
+    line-height: 30px;
+    border-radius: 4px;
+    background-color: #28a745!important;
+    color: white;
+}
+
+.waiting{
+    min-width: 100px;
+    line-height: 30px;
+    border-radius: 4px;
+    background-color: #ffc107 !important;
+    color: black;
 }

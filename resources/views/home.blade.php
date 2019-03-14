@@ -49,6 +49,9 @@
 			@yield('content')
 			@yield('modal')
 		</div>
+		@if (session('errors'))
+			<script>createError("{{session('errors')->first('Error')}}");</script>
+		@endif
 	</body>
 	<script src="{{asset('js/Validator.js')}}"></script>
 	</html>

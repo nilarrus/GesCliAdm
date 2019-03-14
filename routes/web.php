@@ -27,9 +27,3 @@ Route::put('/clients/{id}', 'ClientsController@edit');
 
 Route::post('/uploadFile/{id}', 'ClientsController@upload');
 
-Route::post('/downloadFile', 'ClientsController@download');
-
-/*Route::get('/Clients', function(){
-	return view('Clients.detalle_cli');
-});*/
-

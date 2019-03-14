@@ -60,19 +60,28 @@
 		color: inherit;
 		cursor: context-menu;
 	}
+
+	thead th{
+		text-align: center !important;
+	}
 </style>
 	<div class="sale"></div>
 	
 	<script>
 		$(document).on('change', '.btn-file :file', function() {
-			var form = $('<form action="/uploadFile/{{ $venta->id }}" enctype="multipart/form-data" method="POST" id="query"></form>').appendTo(".sale");
-			var csrfVar = $('meta[name="csrf-token"]').attr('content');
-			form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
 			var file = $(this).prop('files')[0];
-			var tipo = $(this).attr("tipo");
-			CreateElement(form,"input",undefined,{"type":"hidden","name":"tipo","value":tipo});
-			var newFile = $(this).clone().appendTo(form);
-			form.submit();
+			if(checkFileType(file)){
+				var form = $('<form action="/uploadFile/{{ $venta->id }}" enctype="multipart/form-data" method="POST" id="query"></form>').appendTo(".sale");
+				var csrfVar = $('meta[name="csrf-token"]').attr('content');
+				form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
+				var file = $(this).prop('files')[0];
+				var tipo = $(this).attr("tipo");
+				CreateElement(form,"input",undefined,{"type":"hidden","name":"tipo","value":tipo});
+				var newFile = $(this).clone().appendTo(form);
+				form.submit();
+				$('input').hide();
+			}
+			
 		})
 
 		var Datos = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
@@ -86,49 +95,20 @@
 		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);
 		SimpleTable(tab,"Pedido Pro.",{id:"Table_Pro"},archivos);
 		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);
-
-
-		$('#form2').submit(function(e){
-			e.preventDefault();
-			sendPost();
-		});
-
-		function sendPost(){
-			$.ajax({
-				url: '/uploadFile/{{ $venta->id }}',
-				data: new FormData($('#form2')[0]),
-				type: 'POST',
-				processData: false,
-      			contentType: false,
-				success: function(response){
-					if(response === "Correcto"){
-						$('<h1>Todo correcto</h1>').appendTo(".sale");
-					}
-				},
-				error: function(xhr,status,error){
-					console.log(error);
-				}
-			});
-		}
-
-		function downloadFile(){
-			$.ajax({
-				headers: {
-        				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    				},
-				url: '/downloadFile',
-				type: 'POST',
-				processData: false,
-      			contentType: false,
-				success: function(response){
-					console.log(response);
-				},
-				error: function(xhr,status,error){
-					console.log(error)
-				}
-			})
-		}
-
-
+		
+		$('tbody tr').each(function(){
+            var estado = $(this).find('td').eq(1); 
+            console.log(estado)
+            if(estado.html() === "0"){
+                estado.html("")
+                CreateElement(estado,"div","Sin validar",{class:"notValidated"});
+            }else if(estado.html() === "1"){
+                estado.html("")
+                CreateElement(estado,"div","Validado",{class:"validated"});
+            }else if(estado.html() === "2"){
+                estado.html("")
+                CreateElement(estado,"div","En espera",{class:"waiting"});
+            }
+        })
 	</script>
 @stop

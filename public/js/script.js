@@ -1,15 +1,27 @@
 var global_countTime;
 
-//Función que crea el error y le pasa un mensaje por parámetro
-function createError(Message){
-    $('<div>')
-    .attr({class:'Error'})
-    .text(Message)
-    .prepend($('<img>',{src:'/img/exclamacion.png',width:'40px'}))
-    .appendTo('.ErrorContainer');
+function uniqueError(id){
+    var control = true;
+    $('.Error').each(function(){
+        if($(this).attr('id') === id){
+            control = false;
+        }
+    });
 
-    $('.ErrorContainer').show();
-    setTimer();
+    return control;
+}
+//Función que crea el error y le pasa un mensaje por parámetro
+function createError(Message,id){
+
+    if(uniqueError(id)){
+        $('<div>')
+        .attr({class:'Error',id:id})
+        .text(Message)
+        .prepend($('<img>',{src:'/img/exclamacion.png',width:'40px'}))
+        .appendTo('.ErrorContainer');
+        $('.ErrorContainer').show();
+        setTimer();
+    }
 }
 
 //Función que crea un timer que, tras 5 segundos, oculta de nuevo la ventana de error.

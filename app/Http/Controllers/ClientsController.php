@@ -22,64 +22,69 @@ class ClientsController extends Controller
     }
 
     public function edit(Request $request, $id){
-        Cliente::findOrFail($id)
-            ->update([
-                'nombre' => $request->input('nombre'),
-                'direccion' => $request->input('direccion'),
-                'provincia' => $request->input('provincia'),
-                'localidad' => $request->input('localidad'),
-                'CIF/NIF' => $request->input('cif/nif'),
-                'email' => $request->input('email'),
-                'telefono' => $request->input('telefono'),
-                'cp' => $request->input('cp'),
-            ]);
+        try{
+            Cliente::findOrFail($id)
+                ->update([
+                    'nombre' => $request->input('nombre'),
+                    'direccion' => $request->input('direccion'),
+                    'provincia' => $request->input('provincia'),
+                    'localidad' => $request->input('localidad'),
+                    'CIF/NIF' => $request->input('cif/nif'),
+                    'email' => $request->input('email'),
+                    'telefono' => $request->input('telefono'),
+                    'cp' => $request->input('cp'),
+                ]);
 
-        return redirect()->back();
+            return redirect()->back();
+        }catch(\Exception $ex){
+            return back()->withErrors(['Error'=>'Error del servidor']);
+        }
     }
 
     public function showClient($id){
-        $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
-        $ventas = Venta::where('Id_Cliente',$id)->get();
-        return view('clients.detalle_cli', compact('cliente','ventas'));
+        try{
+            $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
+            $ventas = Venta::where('Id_Cliente',$id)->get();
+            return view('clients.detalle_cli', compact('cliente','ventas'));
+        }catch(\Exception $ex){
+            return back()->withErrors(['Error'=>'Error del servidor']);
+        }
     }
 
     public function showSale($id){
-        $venta = Venta::where('id',$id)->first();
-        $archivos = Archivo::where('Id_Venta',$id)->get(["id","Tipo","Archivo","Id_Venta","updated_at"]);
-        return view('clients.detalle_ven',compact('venta','archivos'));
+        try{
+            $venta = Venta::where('id',$id)->first();
+            $archivos = Archivo::where('Id_Venta',$id)->get(["id","Tipo","Archivo","Id_Venta","updated_at"]);
+            return view('clients.detalle_ven',compact('venta','archivos'));
+        }catch(Exception $ex){
+			return back()->withErrors(['Error'=>'Error del servidor']);
+        }
     }
 
     public function upload(Request $request,$id){
-        if($request->hasFile("archivo")){
+        
+        try{
+            /*if($file->getClientOriginalExtension() == "pdf"){
+                return back()->withErrors(['Error'=>'Error del servidor']);
+            }*/
             $file = $request->file('archivo');
+            
+            
             $type = $request->Input("tipo");
 
             $filename = $id . "_" . $type . "_" . date('YmdHis', time()) . "." . $file->getClientOriginalExtension();
 
             Storage::disk('public')->put($filename,file_get_contents($file),'public');
 
-            try{
-                $newFile = new Archivo;
-                $newFile->Tipo = $type;
-                $newFile->Archivo = $filename;
-                $newFile->Id_Venta = $id;
-                $newFile->save();
-            }catch(Exception $e){
-                return "Error";
-            }
+            $newFile = new Archivo;
+            $newFile->Tipo = $type;
+            $newFile->Archivo = $filename;
+            $newFile->Id_Venta = $id;
+            $newFile->save();
 
             return redirect()->back();
-            
-        }else{
-            return "No lo tiene";
-        }
-    }
-
-    public function download(Request $request){
-        if(request()->ajax()){
-            //$headers = array('Content-Type'=> 'application/pdf');
-            //$pathToFile = '.\app\4_factura_20190310055837.pdf';
-            //return response()->download(storage_path($pathToFile),'4_factura_20190310053025.pdf',$headers);
+        }catch(\Exception $ex){
+            return back()->withErrors(['Error'=>'Error del servidor']);
         }
     }
 }

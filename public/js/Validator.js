@@ -1,15 +1,13 @@
 
 $('#form').submit(function(e){
     e.preventDefault();
-    console.log("presubmit")
   
     if(validate() && checkNulls()){
         $('#form')[0].submit();
-        console.log("submit")
     }
 });
 
-$( "input[type='text']" ).change(function() {
+$( ".input" ).change(function() {
 	$(this).css("border","1px solid rgba(0,0,0,0.4");
 	checkNulls();
     validate();
@@ -20,7 +18,7 @@ function validate(){
     var control = true;
     var email = $("input[name='email']");
     var telefono = $("input[name='telefono']");
-    var dni = $("input[name='CIF/NIF']");
+	var dni = $("input[name='cif/nif']");
     if(!validateEmail(email.val()) && email.val() != ""){
         email.css('border','1px solid red');
         createError("El correo tiene un formato incorrecto.", "mail");
@@ -47,7 +45,7 @@ function validate(){
 
 function checkNulls(){
     var control = true;
-    $('input').each(function(){
+    $('.input').each(function(){
         if($(this).val() === ""){
             $(this).css('border','1px solid red');
             control = false;

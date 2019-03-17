@@ -11,11 +11,9 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('home');
-});*/
-
 Route::get('/', 'ClientsController@index');
+
+//Route::post('/','ClientsController@filterClients');
 
 Route::post('/clients/create','ClientsController@create');
 
@@ -25,5 +23,8 @@ Route::get('/sales/{id}', 'ClientsController@showSale');
 
 Route::put('/clients/{id}', 'ClientsController@edit');
 
+//Route::post('/clients/{id}', 'ClientsController@filterSales');
+
 Route::post('/uploadFile/{id}', 'ClientsController@upload');
 
+Route::post('/download/{id}','ClientsController@download');

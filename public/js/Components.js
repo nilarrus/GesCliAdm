@@ -36,20 +36,46 @@ function CreateTable(parent,data,params){
         });
     });
 }
-
+/**
+ * 
+ * @param {*} parent "Elemento al que se añadirá la tabla"
+ * @param {*} text "Título que recibirá el elemento"
+ * @param {*} attr "Elemento de tipo objeto que contiene los posibles atributos que se quieran añadir"
+ * @param {*} data "Elemento que debe tener un array con uno o más objetos de tipo JSON"
+ */
 function SimpleTable(parent,text,attr,data){
     var Split=SplitData(data,text);
     var Tr=CreateElement(parent,"tr");
-    var Th = CreateElement(Tr,"th",text,{colspan:2});
+    var Th = CreateElement(Tr,"th",text,{colspan:4});
     var Span = CreateElement(Th,"span","Añadir "+text, {class:"file-input btn btn-primary btn-file"});
     CreateElement(Span,"input",undefined,{"type":"file",class:"fileInput","name":"archivo","tipo":text})
 
     Split.forEach(function(elements){
         var NewTr=CreateElement(parent,"tr");
-        CreateElement(NewTr,"td",elements.Archivo);
-        CreateElement(NewTr,"td",elements.updated_at);
+        for(element in elements){
+            var id;
+            if(element === "id"){
+                NewTr.attr({id:elements[element]});
+            }else if(element === "Tipo"){
+
+            }
+            else{
+                CreateElement(NewTr,"td",elements[element],{id:id});
+            }
+        }
+        var IconsTD = CreateElement(NewTr,"td");
+        
+        var showDocument = CreateElement(IconsTD,"i",undefined,{class:"fas fa-search-plus fileIcon",'title':'Ver','name':"verDoc"});
+        var url = '/storage/' + elements.Archivo;
+        showDocument.click(function(){ 
+            window.open(url,'blank');
+        });
+
+        CreateElement(IconsTD,"i",undefined,{class:"fas fa-edit fileIcon",'title':'Modificar','name':"editDoc"});
+        CreateElement(IconsTD,"i",undefined,{class:"fas fa-file-download fileIcon",'title':'Descargar','name':"downDoc"});
     });
 }
+
 
 function SplitData(data,type){
     var SplitArray=[];

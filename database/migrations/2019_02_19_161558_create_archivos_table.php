@@ -16,7 +16,8 @@ class CreateArchivosTable extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->increments('id');
             $table->String('Tipo');
-            $table->binary('Archivo');
+            $table->String('Archivo');
+            $table->String('NombreOriginal');
             $table->Integer('Id_Venta')->unsigned();
             $table->timestamps();
 

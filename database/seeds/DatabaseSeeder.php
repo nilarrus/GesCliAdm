@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         DB::table('clientes')->delete();
         DB::table('ventas')->delete();
             
-        
+        //CREACIÓN DE CLIENTES
         for ($i=0; $i < 30; $i++) {
             DB::table('clientes')->insert([
                 'Nombre' => str_random(15),
@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         
+        //CREACIÓN DE VENTAS
         for($i=0; $i < 30; $i++){
             DB::table('ventas')->insert([
                 'Descripcion' => str_random(30),

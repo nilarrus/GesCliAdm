@@ -111,24 +111,25 @@
 	</div>
 	<script type="text/javascript">
 		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
-        var ventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
-        
+        var listadoventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
+        var ventas = listadoventas.data;
         CreateForm('#Input',cliente,undefined);
 
         if(ventas.length != 0){
             CreateTable('#Sales',ventas,undefined);
-            
+            //createFilter("#Sales table thead","/clients/{{$cliente[0]->id}}","ventas","table");
             $('.clickable').click(function(){
-            window.location=$(this).data('href');
-       })
+                window.location=$(this).data('href');
+            });
         }else{
             var div = $('<div class="NoResults"><h3>No hay ventas disponibles</h3></div>')
                         .appendTo('#Sales');
-            CreateElement(div,'div','Ventas',{class:'divtop'})
+            var div = CreateElement(div,'div','Ventas',{class:'divtop'})
+            //createFilter(div,"/clients/{{$cliente[0]->id}}","ventas","div");
         }
 	    
-	    
-	    $('input[name="cif/nif"]').prop('readonly',true);
+        $('input[name="cif/nif"]').prop('readonly',true);
+        
         CreateElement('#Input',"div","Información de Cliente",{class:"divtop"});
 
         $('.clickable').each(function(){
@@ -141,7 +142,6 @@
 
         $('tbody tr').each(function(){
             var estado = $(this).find('td').eq(1); 
-            console.log(estado)
             if(estado.html() === "0"){
                 estado.html("")
                 CreateElement(estado,"div","Sin validar",{class:"notValidated"});
@@ -153,5 +153,6 @@
                 CreateElement(estado,"div","En espera",{class:"waiting"});
             }
         })
+
 	</script>
 @stop

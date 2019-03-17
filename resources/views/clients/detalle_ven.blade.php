@@ -95,10 +95,15 @@
 		SimpleTable(tab,"Presupuesto",{id:"Table_Pre"},archivos);
 		SimpleTable(tab,"Pedido Pro.",{id:"Table_Pro"},archivos);
 		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);
+
+		$("[name='downDoc']").click(function(){
+			var idArchivo = $(this).parent().parent().attr("id")
+			downloadFile(idArchivo);
+		})
+
 		
 		$('tbody tr').each(function(){
             var estado = $(this).find('td').eq(1); 
-            console.log(estado)
             if(estado.html() === "0"){
                 estado.html("")
                 CreateElement(estado,"div","Sin validar",{class:"notValidated"});

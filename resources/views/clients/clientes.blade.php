@@ -14,13 +14,16 @@
             
         </div>
     </div>
-    <div id="ClientsTable">
-    </div>
+    
+    <div id="ClientsTable"></div>
+    {{ $clientes->links() }}
     <script>
         var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ;
-       
-       CreateTable("#ClientsTable",clientes,undefined);
 
+        CreateTable("#ClientsTable",clientes.data,undefined);
+
+        //createFilter('#ClientsTable table thead',"/","clientes","table");
+        
        $('.clickable').each(function(){
             $(this).attr("data-href","/clients/"+$(this).attr("id"));
        })
@@ -47,14 +50,14 @@
                         <div class="modal-form">
                         <form id="form" action="/clients/create" method="POST">
                             @csrf
-                            <label for="nombre">Nombre: <input type="text" name="nombre"></label>
-                            <label for="direccion">Dirección: <input type="text" name="direccion"></label>
-                            <label for="provincia">Provincia: <input type="text" name="provincia"></label>
-                            <label for="localidad">Localidad: <input type="text" name="localidad"></label>
-                            <label for="CIF/NIF">CIF/NIF: <input type="text" name="CIF/NIF"></label>
-                            <label for="email">E-Mail: <input type="text" name="email"></label>
-                            <label for="telefono">Teléfono: <input type="text" name="telefono"></label>
-                            <label for="cp">Código Postal: <input type="text" name="cp"></label>
+                            <label for="nombre">Nombre: <input type="text" name="nombre" class="input"></label>
+                            <label for="direccion">Dirección: <input type="text" name="direccion" class="input"></label>
+                            <label for="provincia">Provincia: <input type="text" name="provincia" class="input"></label>
+                            <label for="localidad">Localidad: <input type="text" name="localidad" class="input"></label>
+                            <label for="CIF/NIF">CIF/NIF: <input type="text" name="CIF/NIF" class="input"></label>
+                            <label for="email">E-Mail: <input type="text" name="email" class="input"></label>
+                            <label for="telefono">Teléfono: <input type="text" name="telefono" class="input"></label>
+                            <label for="cp">Código Postal: <input type="text" name="cp" class="input"></label>
                         </div>
                     </div>
                     <div class="modal-footer">

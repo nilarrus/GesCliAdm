@@ -65,7 +65,7 @@
         }
         table td,th,tr{
             padding: 10px !important;
-            min-width: 20px !important;
+            width: auto !important;
         }   
         #contenedor{
             width: 100%;
@@ -100,19 +100,36 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
+        .buttonTop{
+            top: -50px;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+        }
+
+        .btn{
+            height: 40px;
+        }
+
+        select{
+            width: 100%;
+            height: 30px;
+        }
+
     </style>
 
 @stop
 
 @section('content')
 	<div id="contenedor">
-		<div id="Input"></div>
+        <div id="Input"></div>
 		<div id="Sales"></div>
 	</div>
-	<script type="text/javascript">
+    <script type="text/javascript">
 		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
         var listadoventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
-        var ventas = listadoventas.data;
+        //var ventas = listadoventas.data;
+        var ventas = listadoventas;
         CreateForm('#Input',cliente,undefined);
 
         if(ventas.length != 0){
@@ -131,6 +148,11 @@
         $('input[name="cif/nif"]').prop('readonly',true);
         
         CreateElement('#Input',"div","Información de Cliente",{class:"divtop"});
+
+        //Añadimos el botón para poder agregar una nueva venta
+        $('th:last').css('position','relative');
+        var a = CreateElement('th:last',"a",undefined,{"href":"#costumModal10","data-toggle":"modal",class:"buttonTop"});
+        CreateElement(a,'button','Añadir Venta',{class:'btn btn-primary','type':'submit'});
 
         $('.clickable').each(function(){
             $(this).attr("data-href","/sales/"+$(this).attr("id"));
@@ -155,4 +177,45 @@
         })
 
 	</script>
+@stop
+
+@section('modal')
+    <div id="costumModal10" class="modal" data-easein="bounceIn"  tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title">
+                            Añadir un nuevo cliente
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-form">
+                        <form id="form" action="/sales/create" method="POST">
+                            @csrf
+                            <label for="descripcion">Descripción: <input type="text" name="descripcion" class="input"></label>
+                            <label for="estado">Estado <br>
+                                <select name="estado">
+                                    <option value="0">Validado</option>
+                                    <option value="1">Sin validar</option>
+                                    <option value="2">En espera</option>
+                                </select>
+                            </label>
+                            <input type="hidden" name="id_cliente" value="{{$cliente[0]->id}}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                            Close
+                        </button>
+                        <button class="btn btn-primary" type="submit">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @stop

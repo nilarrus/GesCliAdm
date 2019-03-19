@@ -13,7 +13,7 @@
 
 Route::get('/', 'ClientsController@index');
 
-//Route::post('/','ClientsController@filterClients');
+Route::post('/','ClientsController@filterClients');
 
 Route::post('/clients/create','ClientsController@create');
 
@@ -28,3 +28,7 @@ Route::put('/clients/{id}', 'ClientsController@edit');
 Route::post('/uploadFile/{id}', 'ClientsController@upload');
 
 Route::post('/download/{id}','ClientsController@download');
+
+Route::post('/modify/{id}','ClientsController@modify');
+
+Route::post('/sales/create','ClientsController@createSale');

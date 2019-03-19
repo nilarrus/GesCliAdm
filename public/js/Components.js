@@ -47,8 +47,8 @@ function SimpleTable(parent,text,attr,data){
     var Split=SplitData(data,text);
     var Tr=CreateElement(parent,"tr");
     var Th = CreateElement(Tr,"th",text,{colspan:4});
-    var Span = CreateElement(Th,"span","Añadir "+text, {class:"file-input btn btn-primary btn-file"});
-    CreateElement(Span,"input",undefined,{"type":"file",class:"fileInput","name":"archivo","tipo":text})
+    var Span = CreateElement(Th,"span","Añadir "+text, {class:"file-input btn btn-primary btn-file add"});
+    CreateElement(Span,"input",undefined,{"type":"file",class:"fileInput","name":"archivo","tipo":text});
 
     Split.forEach(function(elements){
         var NewTr=CreateElement(parent,"tr");
@@ -71,7 +71,9 @@ function SimpleTable(parent,text,attr,data){
             window.open(url,'blank');
         });
 
-        CreateElement(IconsTD,"i",undefined,{class:"fas fa-edit fileIcon",'title':'Modificar','name':"editDoc"});
+        var modifyIcon = CreateElement(IconsTD,"i",undefined,{class:"fas fa-edit btn-file modify fileIcon",'title':'Modificar','name':"editDoc"});
+        CreateElement(modifyIcon,"input",undefined,{"type":"file",class:"modifyInput","name":"archivo","tipo":text});
+
         CreateElement(IconsTD,"i",undefined,{class:"fas fa-file-download fileIcon",'title':'Descargar','name':"downDoc"});
     });
 }

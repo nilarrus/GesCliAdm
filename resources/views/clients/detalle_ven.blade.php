@@ -65,24 +65,35 @@
 	thead th{
 		text-align: center !important;
 	}
+
+	tr td{
+		position: relative;
+	}
+
+	.modify{
+		right: 6px !important;
+    	top: -4px;
+	}
+
 </style>
 	
 	<script>
-		$(document).on('change', '.btn-file :file', function() {
+		$(document).on('change', '.btn-file.add :file', function() {
 			var file = $(this).prop('files')[0];
+			var id = {{ $venta->id }};
 			if(checkFileType(file)){
-				var form = $('<form action="/uploadFile/{{ $venta->id }}" enctype="multipart/form-data" method="POST" id="query"></form>').appendTo(".sale");
-				var csrfVar = $('meta[name="csrf-token"]').attr('content');
-				form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");
-				var file = $(this).prop('files')[0];
-				var tipo = $(this).attr("tipo");
-				CreateElement(form,"input",undefined,{"type":"hidden","name":"tipo","value":tipo});
-				var newFile = $(this).clone().appendTo(form);
-				form.submit();
-				$('input').hide();
+				fileActionForm($(this),"/uploadFile/",id);	
 			}
+		});
+
+		$(document).on('change', '.btn-file.modify :file', function() {
 			
-		})
+			var file = $(this).prop('files')[0];
+			var idArchivo = $(this).parent().parent().parent().attr("id");
+			if(checkFileType(file)){
+				fileActionForm($(this),"/modify/",idArchivo);	
+			}
+		});
 
 		var Datos = {!! json_encode($venta->toArray(), JSON_HEX_TAG) !!};
 		var Ventas=[];
@@ -97,7 +108,7 @@
 		SimpleTable(tab,"Pedido Cli.",{id:"Table_Cli"},archivos);
 
 		$("[name='downDoc']").click(function(){
-			var idArchivo = $(this).parent().parent().attr("id")
+			var idArchivo = $(this).parent().parent().attr("id");
 			downloadFile(idArchivo);
 		})
 

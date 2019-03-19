@@ -18,11 +18,12 @@
     <div id="ClientsTable"></div>
     {{ $clientes->links() }}
     <script>
+        
         var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ;
 
         CreateTable("#ClientsTable",clientes.data,undefined);
 
-        //createFilter('#ClientsTable table thead',"/","clientes","table");
+        createFilter('#ClientsTable table thead',"/","clientes","table");
         
        $('.clickable').each(function(){
             $(this).attr("data-href","/clients/"+$(this).attr("id"));

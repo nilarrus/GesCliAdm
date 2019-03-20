@@ -11,19 +11,21 @@
 |
 */
 
-Route::get('/', 'ClientsController@index');
+//Route::get('/', 'ClientsController@index');
 
-Route::post('/','ClientsController@filterClients');
+Route::get('/',  ['as' => 'clientes', 'uses' => 'ClientsController@index']);
 
 Route::post('/clients/create','ClientsController@create');
 
-Route::get('/clients/{id}', 'ClientsController@showClient');
+//Route::get('/clients/{id}', 'ClientsController@showClient');
 
-Route::get('/sales/{id}', 'ClientsController@showSale');
+Route::get('/clients/{id}',  ['as' => 'cliente', 'uses' => 'ClientsController@showClient']);
+
+//Route::get('/sales/{id}', 'ClientsController@showSale');
+
+Route::get('/sales/{id}',  ['as' => 'venta', 'uses' => 'ClientsController@showSale']);
 
 Route::put('/clients/{id}', 'ClientsController@edit');
-
-//Route::post('/clients/{id}', 'ClientsController@filterSales');
 
 Route::post('/uploadFile/{id}', 'ClientsController@upload');
 

@@ -1,7 +1,9 @@
 @extends('home')
 
 @section('content')
+{{ Breadcrumbs::render('clientes') }}
     <div class="content">
+        
         <div class="topContainer">
             <div class="top-title">
                 Listado de Clientes:

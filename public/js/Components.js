@@ -53,13 +53,14 @@ function SimpleTable(parent,text,attr,data){
     Split.forEach(function(elements){
         var NewTr=CreateElement(parent,"tr");
         for(element in elements){
+            console.log(element)
             var id;
             if(element === "id"){
                 NewTr.attr({id:elements[element]});
             }else if(element === "Tipo"){
-
-            }
-            else{
+            }else if( element == "Archivo"){
+                NewTr.attr({"archivo":elements[element]});
+            }else{
                 CreateElement(NewTr,"td",elements[element],{id:id});
             }
         }

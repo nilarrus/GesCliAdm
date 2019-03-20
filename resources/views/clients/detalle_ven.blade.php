@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="sale">
+	{{ Breadcrumbs::render('venta',$venta->Id_Cliente,$venta) }}
 	<div class="sale-in">
 			<h1>Información:</h1>
 		</div>
@@ -111,8 +112,8 @@
 			var idArchivo = $(this).parent().parent().attr("id");
 			downloadFile(idArchivo);
 		})
-
 		
+		//Función que convierte los estados de las ventas en un icono más agradable para la vista
 		$('tbody tr').each(function(){
             var estado = $(this).find('td').eq(1); 
             if(estado.html() === "0"){

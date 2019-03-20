@@ -122,6 +122,7 @@
 
 @section('content')
 	<div id="contenedor">
+        {{ Breadcrumbs::render('cliente',$cliente[0]) }}
         <div id="Input"></div>
 		<div id="Sales"></div>
 	</div>

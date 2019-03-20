@@ -1,5 +1,9 @@
 @extends('home')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('cliente',$cliente[0]) }}
+@stop
+
 @section('ownCSS')
 
     <style>
@@ -122,7 +126,6 @@
 
 @section('content')
 	<div id="contenedor">
-        {{ Breadcrumbs::render('cliente',$cliente[0]) }}
         <div id="Input"></div>
 		<div id="Sales"></div>
 	</div>

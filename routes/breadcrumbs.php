@@ -12,6 +12,4 @@
         $breadcrumbs->parent('cliente',$cliente);
         $breadcrumbs->push('Venta', route('venta',$venta));
     });
-
-
 ?>

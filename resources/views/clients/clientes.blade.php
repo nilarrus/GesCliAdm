@@ -1,7 +1,10 @@
 @extends('home')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('clientes') }}
+@stop
+
 @section('content')
-{{ Breadcrumbs::render('clientes') }}
     <div class="content">
         
         <div class="topContainer">
@@ -22,6 +25,8 @@
     <script>
         
         var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ;
+
+        console.log(clientes)
 
         CreateTable("#ClientsTable",clientes.data,undefined);
 

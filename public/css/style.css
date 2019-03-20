@@ -217,3 +217,24 @@ div.ErrorContainer{
 .fileIcon:hover{
     color: #2e6da4;
 }
+
+.breadcrumb{
+    background-color: transparent !important;
+    line-height: 30px;
+    margin-bottom: 0 !important;
+}
+.breadcrumb ol{
+    margin-bottom: 0 !important;
+}
+
+.breadcrumb-item a{
+    color: white !important;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.breadcrumb-item.active{
+    color: #777 !important;
+    font-weight: 400;
+    font-size: 16px;
+}

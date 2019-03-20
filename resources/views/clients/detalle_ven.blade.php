@@ -1,9 +1,12 @@
 @extends('home')
 
+@section('breadcrumbs')
+	{{ Breadcrumbs::render('venta',$venta->Id_Cliente,$venta) }}
+@stop
+
 @section('content')
 
 <div class="sale">
-	{{ Breadcrumbs::render('venta',$venta->Id_Cliente,$venta) }}
 	<div class="sale-in">
 			<h1>Información:</h1>
 		</div>

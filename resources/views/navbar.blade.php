@@ -4,6 +4,7 @@
 	<div class="container-fluid">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="/">GesCliAdm</a>
+		@yield('breadcrumbs')
 </div>
 	<ul class="nav navbar-nav navbar-right" >
 	{{-- <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

@@ -13,21 +13,9 @@ use DB;
 class ClientsController extends Controller
 {
     public function index(Request $request){
-        //$clientes = Cliente::get('nombre','localidad','nif');
-        if($request->has('filtro')){
-
-            $clientes = DB::table('clientes')
-            ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
-            ->where('Nombre', 'LIKE', '%'.$request->Input('filtro').'%')
-            ->orWhere('Localidad','LIKE','%'.$request->Input('filtro').'%')
-            ->orWhere('cif/nif','LIKE','%'.$request->Input('filtro').'%')
-            ->paginate(10)
-            ->appends('filtro',$request->Input('filtro'));
-        }else{        
-            $clientes = DB::table('clientes')
+        $clientes = DB::table('clientes')
                 ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
                 ->paginate(10);
-        }    
         return view('clients.clientes', compact('clientes'));
     }
 

@@ -132,7 +132,7 @@
     <script type="text/javascript">
 		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
         var listadoventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
-        var ventas = listadoventas.data;
+        var ventas = listadoventas;
         CreateForm('#Input',cliente,undefined);
 
         if(ventas.length != 0){

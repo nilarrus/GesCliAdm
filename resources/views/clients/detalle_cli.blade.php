@@ -132,13 +132,12 @@
     <script type="text/javascript">
 		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
         var listadoventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
-        //var ventas = listadoventas.data;
         var ventas = listadoventas;
         CreateForm('#Input',cliente,undefined);
 
         if(ventas.length != 0){
             CreateTable('#Sales',ventas,undefined);
-            //createFilter("#Sales table thead","/clients/{{$cliente[0]->id}}","ventas","table");
+            createFilter("#Sales table thead","/clients/{{$cliente[0]->id}}","ventas","table");
             $('.clickable').click(function(){
                 window.location=$(this).data('href');
             });
@@ -146,7 +145,7 @@
             var div = $('<div class="NoResults"><h3>No hay ventas disponibles</h3></div>')
                         .appendTo('#Sales');
             var div = CreateElement(div,'div','Ventas',{class:'divtop'})
-            //createFilter(div,"/clients/{{$cliente[0]->id}}","ventas","div");
+            createFilter(div,"/clients/{{$cliente[0]->id}}","ventas","div");
         }
 	    
         $('input[name="cif/nif"]').prop('readonly',true);
@@ -179,6 +178,7 @@
                 CreateElement(estado,"div","En espera",{class:"waiting"});
             }
         })
+            $('input[name="filtro"]').val('{{$filtro}}');
 
 	</script>
 @stop

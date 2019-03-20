@@ -1,7 +1,11 @@
 @extends('home')
 
 @section('breadcrumbs')
+<<<<<<< HEAD
     <a href="/">{{ Breadcrumbs::render('clientes') }}</a>
+=======
+   
+>>>>>>> 1e2775ab1be213b198cc2fb34fc2d76202e1b9a5
 @stop
 
 @section('content')
@@ -23,7 +27,10 @@
     <div id="ClientsTable"></div>
     {{ $clientes->links() }}
     <script>
+<<<<<<< HEAD
         
+=======
+>>>>>>> 1e2775ab1be213b198cc2fb34fc2d76202e1b9a5
         var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ;
 
         console.log(clientes)
@@ -40,6 +47,11 @@
             window.location=$(this).data('href');
        });
 
+<<<<<<< HEAD
+=======
+        $('input[name="filtro"]').val('{{$filtro}}');
+
+>>>>>>> 1e2775ab1be213b198cc2fb34fc2d76202e1b9a5
     </script>
 @stop
 

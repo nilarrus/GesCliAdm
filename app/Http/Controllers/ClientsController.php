@@ -13,26 +13,35 @@ use DB;
 class ClientsController extends Controller
 {
     public function index(Request $request){
-        //$clientes = Cliente::get('nombre','localidad','nif');
         if($request->has('filtro')){
-            $filtro = $request->Input('filtro');
-            $clientes = DB::table('clientes')
-            ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
-            ->where('Nombre', 'LIKE', '%'.$request->Input('filtro').'%')
-            ->orWhere('Localidad','LIKE','%'.$request->Input('filtro').'%')
-            ->orWhere('cif/nif','LIKE','%'.$request->Input('filtro').'%')
-            ->paginate(10)
-            ->appends('filtro',$request->Input('filtro'));
-
+            $filtro=$request->input('filtro');
+            $clientes=DB::table('clientes')
+                            ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
+                            ->where('nombre','LIKE',"%".$request->input('filtro')."%")
+                            ->orwhere('localidad','LIKE',"%".$request->input('filtro')."%")
+                            ->orwhere('cif/nif','LIKE',"%".$request->input('filtro')."%")
+                            ->paginate(10)
+                            ->appends('filtro',$filtro);
+            return view('clients.clientes', compact('clientes','filtro'));
             
         }else{
-            $filtro = null;
-            $clientes = DB::table('clientes')
+        $filtro=null;
+        $clientes = DB::table('clientes')
+                ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
+                ->paginate(10);            
+                return view('clients.clientes', compact('clientes','filtro'));
+
+
+        }
+
+    }
+
+   /* public function index(Request $request){
+        $clientes = DB::table('clientes')
                 ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
                 ->paginate(10);
-        }    
-        return view('clients.clientes', compact('clientes','filtro'));
-    }
+        return view('clients.clientes', compact('clientes'));
+    }*/
 
     public function create(Request $request){
         Cliente::create($request->all());
@@ -59,18 +68,32 @@ class ClientsController extends Controller
         }
     }
 
-    public function showClient($id){
+    public function showClient(Request $request, $id){
         try{
-            $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
+            if($request->has('filtro')){
+                $filtro=$request->input('filtro');
+                $ventas=DB::table('ventas')
+                            ->select('id', 'Descripcion','Estado','Id_Cliente','Updated_at')
+                            ->where('id_cliente',$id)
+                            ->where('estado','LIKE',"%".$request->input('filtro')."%")
+                            ->orwhere('id_cliente',$id)
+                            ->where('updated_at','LIKE',"%".$request->input('filtro')."%")
+                            ->paginate(10)
+                            ->appends('filtro',$filtro);
+
+            }else{
+            $filtro=null;       
             $ventas = Venta::where('Id_Cliente',$id)->get(['id','Descripcion','Estado','Id_Cliente','Updated_at']);
             
-            return view('clients.detalle_cli', compact('cliente','ventas'));
+            }
+            $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
+            return view('clients.detalle_cli', compact('cliente','ventas','filtro'));
             
         }catch(\Exception $ex){
             return back()->withErrors(['Error'=>'Error del servidor']);
         }
     }
-
+    
     public function showSale($id){
         try{
             $venta = Venta::where('id',$id)->first();

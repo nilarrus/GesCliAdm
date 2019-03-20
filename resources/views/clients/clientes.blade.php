@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('clientes') }}
+    <a href="/">{{ Breadcrumbs::render('clientes') }}</a>
 @stop
 
 @section('content')
@@ -39,6 +39,7 @@
        $('.clickable').click(function(){
             window.location=$(this).data('href');
        });
+
     </script>
 @stop
 

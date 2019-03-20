@@ -13,10 +13,25 @@ use DB;
 class ClientsController extends Controller
 {
     public function index(Request $request){
-        $clientes = DB::table('clientes')
+        //$clientes = Cliente::get('nombre','localidad','nif');
+        if($request->has('filtro')){
+            $filtro = $request->Input('filtro');
+            $clientes = DB::table('clientes')
+            ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
+            ->where('Nombre', 'LIKE', '%'.$request->Input('filtro').'%')
+            ->orWhere('Localidad','LIKE','%'.$request->Input('filtro').'%')
+            ->orWhere('cif/nif','LIKE','%'.$request->Input('filtro').'%')
+            ->paginate(10)
+            ->appends('filtro',$request->Input('filtro'));
+
+            
+        }else{
+            $filtro = null;
+            $clientes = DB::table('clientes')
                 ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
                 ->paginate(10);
-        return view('clients.clientes', compact('clientes'));
+        }    
+        return view('clients.clientes', compact('clientes','filtro'));
     }
 
     public function create(Request $request){
@@ -55,24 +70,6 @@ class ClientsController extends Controller
             return back()->withErrors(['Error'=>'Error del servidor']);
         }
     }
-
-    /*public function filterSales(Request $request,$id){
-        try{
-            $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
-            
-            $ventas = Venta::where(function ($query) use ($request,$id){
-                $query->where('Id_Cliente',$id);
-            })->where(function ($query) use ($request){
-                $query->where('Updated_at', 'LIKE', '%'.$request->Input('filtro').'%')
-                    ->orWhere('Created_at','LIKE','%'.$request->Input('filtro').'%')
-                    ->orWhere('estado','LIKE','%'.$request->Input('filtro').'%');
-            })->paginate(10);
-            
-            return view('clients.detalle_cli', compact('cliente','ventas'));
-        }catch(\Exception $ex){
-            
-        }
-    }*/
 
     public function showSale($id){
         try{

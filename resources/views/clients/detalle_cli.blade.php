@@ -192,7 +192,7 @@
                             ×
                         </button>
                         <h4 class="modal-title">
-                            Añadir un nuevo cliente
+                            Añadir una nueva venta
                         </h4>
                     </div>
                     <div class="modal-body">
@@ -202,8 +202,9 @@
                             <label for="descripcion">Descripción: <input type="text" name="descripcion" class="input"></label>
                             <label for="estado">Estado <br>
                                 <select name="estado">
-                                    <option value="0">Validado</option>
-                                    <option value="1">Sin validar</option>
+                                    <option selected="selected" disabled>-- Escoge una opción --</option>
+                                    <option value="0">Sin validar</option>
+                                    <option value="1">Validado</option>
                                     <option value="2">En espera</option>
                                 </select>
                             </label>

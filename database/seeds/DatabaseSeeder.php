@@ -33,10 +33,13 @@ class DatabaseSeeder extends Seeder
         }
         
         //CREACIÓN DE VENTAS
+
+        $estados = ['Validado','Sin validar','En espera'];
+        
         for($i=0; $i < 30; $i++){
             DB::table('ventas')->insert([
                 'Descripcion' => str_random(30),
-                'Estado' => rand(0,2),
+                'Estado' => $estados[rand(0,2)],
                 'id_cliente' => rand(1,30),
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'),

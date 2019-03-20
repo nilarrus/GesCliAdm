@@ -98,3 +98,19 @@ function fileActionForm(element,link,id){
     form.submit();
     $('input').hide();
 }
+
+function estadoVentas(){
+    $('tbody tr').each(function(){
+        var estado = $(this).find('td').eq(1); 
+        if(estado.html() === "Sin validar"){
+            estado.html("")
+            CreateElement(estado,"div","Sin validar",{class:"notValidated"});
+        }else if(estado.html() === "Validado"){
+            estado.html("")
+            CreateElement(estado,"div","Validado",{class:"validated"});
+        }else if(estado.html() === "En espera"){
+            estado.html("")
+            CreateElement(estado,"div","En espera",{class:"waiting"});
+        }
+    });
+}

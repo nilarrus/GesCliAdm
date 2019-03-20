@@ -49,6 +49,7 @@
 	th span{
 		width: 150px;
 	}
+	
 	h1{
 		text-align: left;
 	}
@@ -117,18 +118,6 @@
 		})
 		
 		//Función que convierte los estados de las ventas en un icono más agradable para la vista
-		$('tbody tr').each(function(){
-            var estado = $(this).find('td').eq(1); 
-            if(estado.html() === "0"){
-                estado.html("")
-                CreateElement(estado,"div","Sin validar",{class:"notValidated"});
-            }else if(estado.html() === "1"){
-                estado.html("")
-                CreateElement(estado,"div","Validado",{class:"validated"});
-            }else if(estado.html() === "2"){
-                estado.html("")
-                CreateElement(estado,"div","En espera",{class:"waiting"});
-            }
-        })
+		estadoVentas();
 	</script>
 @stop

@@ -105,7 +105,7 @@
         }
 
         .buttonTop{
-            top: -50px;
+            top: -102px;
             right: 0;
             bottom: 0;
             position: absolute;
@@ -132,7 +132,7 @@
     <script type="text/javascript">
 		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
         var listadoventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
-        var ventas = listadoventas;
+        var ventas = listadoventas.data;
         CreateForm('#Input',cliente,undefined);
 
         if(ventas.length != 0){
@@ -165,20 +165,8 @@
             window.location=$(this).data('href');
         });
 
-        $('tbody tr').each(function(){
-            var estado = $(this).find('td').eq(1); 
-            if(estado.html() === "0"){
-                estado.html("")
-                CreateElement(estado,"div","Sin validar",{class:"notValidated"});
-            }else if(estado.html() === "1"){
-                estado.html("")
-                CreateElement(estado,"div","Validado",{class:"validated"});
-            }else if(estado.html() === "2"){
-                estado.html("")
-                CreateElement(estado,"div","En espera",{class:"waiting"});
-            }
-        })
-            $('input[name="filtro"]').val('{{$filtro}}');
+        estadoVentas();
+        $('input[name="filtro"]').val('{{$filtro}}');
 
 	</script>
 @stop

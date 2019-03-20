@@ -36,13 +36,6 @@ class ClientsController extends Controller
 
     }
 
-   /* public function index(Request $request){
-        $clientes = DB::table('clientes')
-                ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
-                ->paginate(10);
-        return view('clients.clientes', compact('clientes'));
-    }*/
-
     public function create(Request $request){
         Cliente::create($request->all());
         return redirect('/');
@@ -82,10 +75,13 @@ class ClientsController extends Controller
                             ->appends('filtro',$filtro);
 
             }else{
-            $filtro=null;       
-            $ventas = Venta::where('Id_Cliente',$id)->get(['id','Descripcion','Estado','Id_Cliente','Updated_at']);
-            
+                $filtro=null;       
+                $ventas = DB::table('ventas')
+                    ->select('id', 'Descripcion', 'Estado', 'Id_Cliente', 'Updated_at')
+                    ->where('Id_Cliente',$id)
+                    ->paginate(10);
             }
+
             $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);
             return view('clients.detalle_cli', compact('cliente','ventas','filtro'));
             
@@ -93,7 +89,7 @@ class ClientsController extends Controller
             return back()->withErrors(['Error'=>'Error del servidor']);
         }
     }
-    
+
     public function showSale($id){
         try{
             $venta = Venta::where('id',$id)->first();

@@ -185,12 +185,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="modal-form">
-                        <form id="form" action="/sales/create" method="POST">
+                        <form id="createSale" action="/sales/create" method="POST">
                             @csrf
                             <label for="descripcion">Descripción: <input type="text" name="descripcion" class="input"></label>
                             <label for="estado">Estado <br>
-                                <select name="estado">
-                                    <option selected="selected" disabled>-- Escoge una opción --</option>
+                                <select name="estado" class="input">
+                                    <option selected="selected" value="" disabled>-- Escoge una opción --</option>
                                     <option value="0">Sin validar</option>
                                     <option value="1">Validado</option>
                                     <option value="2">En espera</option>

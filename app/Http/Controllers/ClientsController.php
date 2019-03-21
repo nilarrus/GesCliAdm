@@ -101,6 +101,9 @@ class ClientsController extends Controller
     }
 
     public function upload(Request $request,$id){
+        try{
+
+        
             $file = $request->file('archivo');
             $originalFilename = $file->getClientOriginalName();
             $type = $request->Input("tipo");
@@ -117,6 +120,9 @@ class ClientsController extends Controller
             $newFile->save();
             
             return redirect()->back();
+        }catch(Exception $ex){
+            return back()->withErrors(['Error'=>'Error del servidor']);
+        }
        
     }
 
@@ -136,31 +142,39 @@ class ClientsController extends Controller
     }
 
     public function modify(Request $request,$id){
-        $file = $request->file('archivo'); //Archivo recibido por parámetro
-        $DBInfo = Archivo::where('id',$id)->get(); //Info de archivo en BDD
-        
-        $NameInDB = $DBInfo[0]->Archivo; //Nombre de archivo en BDD
-        $originalFilename = $file->getClientOriginalName(); //Nombre original del archivo subido por cliente
-        $nameParts = explode('_',$NameInDB); //Troceamos el nombre que tenía en la base de datos
-        $filename = $nameParts[0] . "_" . $nameParts[1] . "_" . date('YmdHis', time()) . ".pdf"; //Creamos un nuevo nombre en base a lo anterior
-        
-        Storage::delete($NameInDB);
-        
-        Storage::disk('public')->put($filename,file_get_contents($file),'public'); //Subimos el archivo físico a la carpeta correspondiente
-        //Metemos los datos en la base de datos y guardamos
-        $DBInfo[0]->Archivo = $filename;
-        $DBInfo[0]->NombreOriginal = $originalFilename;
-        $DBInfo[0]->save();
+        try{
+            $file = $request->file('archivo'); //Archivo recibido por parámetro
+            $DBInfo = Archivo::where('id',$id)->get(); //Info de archivo en BDD
+            
+            $NameInDB = $DBInfo[0]->Archivo; //Nombre de archivo en BDD
+            $originalFilename = $file->getClientOriginalName(); //Nombre original del archivo subido por cliente
+            $nameParts = explode('_',$NameInDB); //Troceamos el nombre que tenía en la base de datos
+            $filename = $nameParts[0] . "_" . $nameParts[1] . "_" . date('YmdHis', time()) . ".pdf"; //Creamos un nuevo nombre en base a lo anterior
+            
+            Storage::delete($NameInDB);
+            
+            Storage::disk('public')->put($filename,file_get_contents($file),'public'); //Subimos el archivo físico a la carpeta correspondiente
+            //Metemos los datos en la base de datos y guardamos
+            $DBInfo[0]->Archivo = $filename;
+            $DBInfo[0]->NombreOriginal = $originalFilename;
+            $DBInfo[0]->save();
 
-        return back();
+            return back();
+        }catch(Exception $ex){
+            return back()->withErrors(['Error'=>'Error del servidor']);
+        }
     }
 
     public function createSale(Request $request){
-        $venta = new Venta;
-        $venta->Descripcion = $request->Input('descripcion');
-        $venta->Estado = $request->Input('estado');
-        $venta->Id_Cliente = $request->Input('id_cliente');
-        $venta->save();
-        return back();
+        try{
+            $venta = new Venta;
+            $venta->Descripcion = $request->Input('descripcion');
+            $venta->Estado = $request->Input('estado');
+            $venta->Id_Cliente = $request->Input('id_cliente');
+            $venta->save();
+            return back();
+        }catch(Exception $ex){
+            return back()->withErrors(['Error'=>'Error del servidor']);
+        }
     }
 }

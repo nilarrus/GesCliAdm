@@ -58,8 +58,7 @@ function createFilter(parent,url,vista,tipo){
     var form = $('<form>')
         .attr({'method':'GET',"action":url})
         .appendTo(".filterInputs");
-    /*var csrfVar = $('meta[name="csrf-token"]').attr('content');
-            form.append("<input name='_token' value='" + csrfVar + "' type='hidden'>");*/
+
     $('<input>')
             .attr({'type':'text','name':'filtro','tipo':vista})
             .appendTo(form)
@@ -99,6 +98,7 @@ function fileActionForm(element,link,id){
     $('input').hide();
 }
 
+//Función que se utiliza para darle estilo al estado de las ventas
 function estadoVentas(){
     $('tbody tr').each(function(){
         var estado = $(this).find('td').eq(1); 

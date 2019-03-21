@@ -1,9 +1,16 @@
 
 $('#form').submit(function(e){
     e.preventDefault();
-  
-    if(validate() && checkNulls()){
+	console.log("hola")
+    if(checkNulls() && validate()){
         $('#form')[0].submit();
+    }
+});
+
+$('#createSale').submit(function(e){
+    e.preventDefault();
+    if(checkNulls() &&validate()){
+        $('#createSale')[0].submit();
     }
 });
 
@@ -19,6 +26,8 @@ function validate(){
     var email = $("input[name='email']");
     var telefono = $("input[name='telefono']");
 	var dni = $("input[name='cif/nif']");
+	var stateDropDown = $('[name="estado"]');
+	stateDropDown.css("border","1px solid rgba(0,0,0,0.4");
     if(!validateEmail(email.val()) && email.val() != ""){
         email.css('border','1px solid red');
         createError("El correo tiene un formato incorrecto.", "mail");
@@ -33,23 +42,31 @@ function validate(){
 		dni.css('border','1px solid red');
 		createError("CIF/NIF incorrecto","nif");
         control = false;
-    }
+	}
+	
+	if(stateDropDown.children("option:selected").val() === ""){
+		stateDropDown.css('border','1px solid red');
+		createError("Todos los campos son obligatorios.","blank");
+		control = false;
+	}
     
     if(control){
         return true;
     }else{
         return false;
     }
-    
 }
 
 function checkNulls(){
-    var control = true;
+    let control = true;
     $('.input').each(function(){
         if($(this).val() === ""){
             $(this).css('border','1px solid red');
             control = false;
-        }
+        }else if($(this).children("option:selected").val() === ""){
+			$(this).css('border','1px solid red');
+            control = false;
+		}
     })
 
     if(control){
@@ -151,6 +168,8 @@ function validateCIF(cif)
 	return false;
 }
 
+
+//Función para validar una subida de archivo. Recibira un string con el nombre y se comprobará que sea PDF
 function checkFileType(file){
 	var extension = file.name.split('.').pop();
 	if(extension === "pdf"){

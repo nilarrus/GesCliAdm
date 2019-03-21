@@ -1,6 +1,5 @@
 Eric:
--Este sprint al tener menos horas y un trabajo no muy abultado de lógica, ha pasado bastante bien.
--Lo  bueno de tener a un compañero que sabe bastante es que hace que mis dudas se resuelvan de forma bastante eficiente, aunque a veces trabaja más rapido y me cuesta seguir el ritmo, pero después si hay algo que no se que es o que hace me ayuda a entenderlo.
+-En este sprint me he decidido ha hacer algna de las especificaciones con mas horas, y esto me ha llevado mas de lo que deberia, me he dado cuenta que necesito practicar mas, no solo con mirarmelo es suficiente.
 
 Rubén:
 -En este sprint no he visto demasiados problemas, la verdad que se han echado en falta algunas horas porque no ha dado tiempo a desarrollar gran cosa, espero que para próximos sprints esto cambie.

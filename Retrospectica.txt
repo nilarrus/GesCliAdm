@@ -1,6 +1,6 @@
 Eric:
--Este sprint al tener menos horas y un trabajo no muy abultado de lógica, ha pasado bastante bien.
--Lo  bueno de tener a un compañero que sabe bastante es que hace que mis dudas se resuelvan de forma bastante eficiente, aunque a veces trabaja más rapido y me cuesta seguir el ritmo, pero después si hay algo que no se que es o que hace me ayuda a entenderlo.
+
 
 Rubén:
--En este sprint no he visto demasiados problemas, la verdad que se han echado en falta algunas horas porque no ha dado tiempo a desarrollar gran cosa, espero que para próximos sprints esto cambie.
+-En este sprint creo que hemos puesto demasiadas horas para tareas muy simples, sobretodo teniendo en cuenta que algunas se compaginaban. Para siguientes proyectos me gustaría afinar más en esto porque podría haber sido un proyecto más fructífero.
+-Una vez más he vuelto a caer en hacer absolutamente todo el proyecto yo, dejando una parte muy pequeña para mi compañero. Es verdad que estuvo malo, pero es algo negativo para quien me acoompaña porque no puede aportar como debería. Debo centrarme más en lo que se me encomienda y no tanto en realizar tareas rápidamente para sacar el trabajo.

@@ -71,7 +71,7 @@ class ClientsController extends Controller
                             ->where('estado','LIKE',"%".$request->input('filtro')."%")
                             ->orwhere('id_cliente',$id)
                             ->where('updated_at','LIKE',"%".$request->input('filtro')."%")
-                            ->paginate(10)
+                            ->paginate(2)
                             ->appends('filtro',$filtro);
 
             }else{
@@ -79,7 +79,7 @@ class ClientsController extends Controller
                 $ventas = DB::table('ventas')
                     ->select('id', 'Descripcion', 'Estado', 'Id_Cliente', 'Updated_at')
                     ->where('Id_Cliente',$id)
-                    ->paginate(10);
+                    ->paginate(2);
             }
 
             $cliente = Cliente::where('id',$id)->get(['id','nombre','direccion','provincia','localidad','cif/nif','email','telefono','cp']);

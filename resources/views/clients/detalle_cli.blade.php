@@ -127,7 +127,10 @@
 @section('content')
 	<div id="contenedor">
         <div id="Input"></div>
-		<div id="Sales"></div>
+		<div style="display:flex;flex-direction:column; align-items:center;">
+            <div id="Sales"></div>
+            {{ $ventas->links() }}
+        </div>
 	</div>
     <script type="text/javascript">
 		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
@@ -167,7 +170,6 @@
 
         estadoVentas();
         $('input[name="filtro"]').val('{{$filtro}}');
-
 	</script>
 @stop
 
@@ -191,9 +193,9 @@
                             <label for="estado">Estado <br>
                                 <select name="estado" class="input">
                                     <option selected="selected" value="" disabled>-- Escoge una opción --</option>
-                                    <option value="0">Sin validar</option>
-                                    <option value="1">Validado</option>
-                                    <option value="2">En espera</option>
+                                    <option value="Sin validar">Sin validar</option>
+                                    <option value="Validado">Validado</option>
+                                    <option value="En espera">En espera</option>
                                 </select>
                             </label>
                             <input type="hidden" name="id_cliente" value="{{$cliente[0]->id}}">

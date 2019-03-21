@@ -25,7 +25,7 @@ function validate(){
     var control = true;
     var email = $("input[name='email']");
     var telefono = $("input[name='telefono']");
-	var dni = $("input[name='CIF/NIF']");
+	var dni = $("input[name='cif/nif']");
 	var stateDropDown = $('[name="estado"]');
 	stateDropDown.css("border","1px solid rgba(0,0,0,0.4");
     if(!validateEmail(email.val()) && email.val() != ""){

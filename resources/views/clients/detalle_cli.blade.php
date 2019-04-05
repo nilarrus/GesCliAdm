@@ -133,7 +133,8 @@
         </div>
 	</div>
     <script type="text/javascript">
-		var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!}; 
+        var cliente = {!! json_encode($cliente, JSON_HEX_TAG) !!};
+        console.log(cliente)
         var listadoventas = {!! json_encode($ventas, JSON_HEX_TAG) !!};
         var ventas = listadoventas.data;
         CreateForm('#Input',cliente,undefined);
@@ -191,7 +192,7 @@
                             @csrf
                             <label for="descripcion">Descripción: <input type="text" name="descripcion" class="input"></label>
                             <label for="estado">Estado <br>
-                                <select name="estado" class="input">
+                                <select name="estado">
                                     <option selected="selected" value="" disabled>-- Escoge una opción --</option>
                                     <option value="Sin validar">Sin validar</option>
                                     <option value="Validado">Validado</option>

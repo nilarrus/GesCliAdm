@@ -16,7 +16,7 @@ class ClientsController extends Controller
         if($request->has('filtro')){
             $filtro=$request->input('filtro');
             $clientes=DB::table('clientes')
-                            ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
+                            ->select('id', 'Nombre', 'Localidad', 'cif/nif')
                             ->where('nombre','LIKE',"%".$request->input('filtro')."%")
                             ->orwhere('localidad','LIKE',"%".$request->input('filtro')."%")
                             ->orwhere('cif/nif','LIKE',"%".$request->input('filtro')."%")
@@ -27,7 +27,7 @@ class ClientsController extends Controller
         }else{
         $filtro=null;
         $clientes = DB::table('clientes')
-                ->select('id', 'Nombre', 'Localidad', 'CIF/NIF')
+                ->select('id', 'Nombre', 'Localidad', 'cif/nif')
                 ->paginate(10);            
                 return view('clients.clientes', compact('clientes','filtro'));
 
@@ -37,7 +37,20 @@ class ClientsController extends Controller
     }
 
     public function create(Request $request){
-        Cliente::create($request->all());
+        //echo $request->input('cif/nif');
+        //Cliente::create($request->all());
+        Cliente::create(
+            [
+                'nombre' => $request->input('nombre'),
+                'direccion' => $request->input('direccion'),
+                'provincia' => $request->input('provincia'),
+                'localidad' => $request->input('localidad'),
+                'CIF/NIF' => $request->input('cif/nif'),
+                'email' => $request->input('email'),
+                'telefono' => $request->input('telefono'),
+                'cp' => $request->input('cp'),
+            ]
+        );
         return redirect('/');
     }
 
@@ -49,7 +62,7 @@ class ClientsController extends Controller
                     'direccion' => $request->input('direccion'),
                     'provincia' => $request->input('provincia'),
                     'localidad' => $request->input('localidad'),
-                    'CIF/NIF' => $request->input('CIF/NIF'),
+                    'cif/nif' => $request->input('cif/nif'),
                     'email' => $request->input('email'),
                     'telefono' => $request->input('telefono'),
                     'cp' => $request->input('cp'),

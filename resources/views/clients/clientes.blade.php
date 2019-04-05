@@ -65,7 +65,7 @@
                             <label for="direccion">Dirección: <input type="text" name="direccion" class="input"></label>
                             <label for="provincia">Provincia: <input type="text" name="provincia" class="input"></label>
                             <label for="localidad">Localidad: <input type="text" name="localidad" class="input"></label>
-                            <label for="CIF/NIF">CIF/NIF: <input type="text" name="CIF/NIF" class="input"></label>
+                            <label for="cif/nif">CIF/NIF: <input type="text" name="cif/nif" class="input"></label>
                             <label for="email">E-Mail: <input type="text" name="email" class="input"></label>
                             <label for="telefono">Teléfono: <input type="text" name="telefono" class="input"></label>
                             <label for="cp">Código Postal: <input type="text" name="cp" class="input"></label>

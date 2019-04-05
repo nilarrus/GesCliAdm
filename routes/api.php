@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+//Colocar las rutas de la api aqui
 Route::get('clientes', 'ClientController@index');
 Route::get('clientes/{id}', 'ClientController@show');
 Route::post('clientes', 'ClientController@create');

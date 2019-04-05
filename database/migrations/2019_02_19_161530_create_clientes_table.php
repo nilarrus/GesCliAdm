@@ -19,7 +19,7 @@ class CreateClientesTable extends Migration
             $table->String('Direccion');
             $table->String('Provincia');
             $table->String('Localidad');
-            $table->String('CIF/NIF');
+            $table->String('cif/nif');
             $table->String('Email');
             $table->String('Telefono');
             $table->String('CP');

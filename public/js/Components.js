@@ -53,7 +53,6 @@ function SimpleTable(parent,text,attr,data){
     Split.forEach(function(elements){
         var NewTr=CreateElement(parent,"tr");
         for(element in elements){
-            console.log(element)
             var id;
             if(element === "id"){
                 NewTr.attr({id:elements[element]});

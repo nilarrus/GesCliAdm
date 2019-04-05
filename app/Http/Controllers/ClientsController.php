@@ -49,7 +49,7 @@ class ClientsController extends Controller
                     'direccion' => $request->input('direccion'),
                     'provincia' => $request->input('provincia'),
                     'localidad' => $request->input('localidad'),
-                    'CIF/NIF' => $request->input('cif/nif'),
+                    'CIF/NIF' => $request->input('CIF/NIF'),
                     'email' => $request->input('email'),
                     'telefono' => $request->input('telefono'),
                     'cp' => $request->input('cp'),

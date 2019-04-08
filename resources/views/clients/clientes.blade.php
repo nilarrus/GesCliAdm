@@ -5,6 +5,7 @@
 @stop
 
 @section('content')
+<script> ajaxClientes();</script>
     <div class="content">
         
         <div class="topContainer">
@@ -21,10 +22,10 @@
     </div>
     
     <div id="ClientsTable"></div>
-    {{ $clientes->links() }}
     <script>
         
-        var clientes = {!! json_encode($clientes->toArray(), JSON_HEX_TAG) !!} ;
+        /*
+        var clientes ;
 
         console.log(clientes)
 
@@ -40,8 +41,8 @@
             window.location=$(this).data('href');
        });
 
-        $('input[name="filtro"]').val('{{$filtro}}');
-
+        $('input[name="filtro"]').val('');
+*/
     </script>
 @stop
 

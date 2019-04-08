@@ -13,7 +13,7 @@
 
 //Route::get('/', 'ClientsController@index');
 
-Route::get('/',  ['as' => 'clientes', 'uses' => 'ClientsController@index']);
+Route::get('/',  ['as' => 'clientes', 'uses' => 'ClientsController@getIndex']);
 
 Route::post('/clients/create','ClientsController@create');
 

@@ -19,35 +19,30 @@ class ClientsController extends Controller
 
         return view('clients.clientes');
     }
-    /**
-     * return json
-     */
-    public function ApiClientes(){
-        $clientes = DB::table('clientes')->select('id','Nombre','Direccion','Localidad','cif/nif')->get();
-        return $clientes;
-    }
     public function index(Request $request){
         if($request->has('filtro')){
             $filtro=$request->input('filtro');
             $clientes=DB::table('clientes')
-                            ->select('id', 'Nombre', 'Localidad', 'cif/nif')
+                            ->select('id', 'Nombre','Direccion', 'Localidad', 'cif/nif')
                             ->where('nombre','LIKE',"%".$request->input('filtro')."%")
                             ->orwhere('localidad','LIKE',"%".$request->input('filtro')."%")
                             ->orwhere('cif/nif','LIKE',"%".$request->input('filtro')."%")
-                            ->paginate(10)
+                            ->paginate(5)
                             ->appends('filtro',$filtro);
             return view('clients.clientes', compact('clientes','filtro'));
             
         }else{
         $filtro=null;
         $clientes = DB::table('clientes')
-                ->select('id', 'Nombre', 'Localidad', 'cif/nif')
-                ->paginate(10);            
+                ->select('id', 'Nombre','Direccion', 'Localidad', 'cif/nif')
+                ->paginate(5);            
                 return view('clients.clientes', compact('clientes','filtro'));
 
 
+        }if($request->ajax()){
+            return Response::json($clientes);
         }
-
+        return view('clients.clientes', compact('clientes','filtro'));
     }
 
     public function create(Request $request){

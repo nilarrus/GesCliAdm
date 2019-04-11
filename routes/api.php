@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 //Colocar las rutas de la api aqui
 Route::get('clientes', 'ClientsController@ApiClientes');
+//
 Route::get('clientes/{id}', 'ClientController@show');
 Route::post('clientes', 'ClientController@create');
 Route::put('clientes/{id}', 'ClientController@update');

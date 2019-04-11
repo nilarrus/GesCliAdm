@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-<script> ajaxClientes();</script>
     <div class="content">
         
         <div class="topContainer">
@@ -22,10 +21,11 @@
     </div>
     
     <div id="ClientsTable"></div>
+    <div id="links">
+        {{$clientes->links()}}
+    </div>
     <script>
-        
-        /*
-        var clientes ;
+        var clientes = {!! json_encode($clientes,JSON_HEX_TAG) !!};
 
         console.log(clientes)
 
@@ -42,7 +42,6 @@
        });
 
         $('input[name="filtro"]').val('');
-*/
     </script>
 @stop
 

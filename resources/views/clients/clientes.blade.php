@@ -47,7 +47,7 @@
         $(document).ready(function(){
             $(".pagination a").on('click',function(e){
                 e.preventDefault();
-                ajaxClientes($(this).attr('href'));//falta pasar el numero de pagina
+                ajaxClientes($(this).attr('href'));//falta pasar el numero de pagina i token 
             });
         });
         

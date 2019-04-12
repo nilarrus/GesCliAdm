@@ -25,9 +25,10 @@
         {{$clientes->links()}}
     </div>
     <script>
+        
         var clientes = {!! json_encode($clientes,JSON_HEX_TAG) !!};
 
-        console.log(clientes)
+        //console.log(clientes)
 
         CreateTable("#ClientsTable",clientes.data,undefined);
 
@@ -42,7 +43,15 @@
        });
 
         $('input[name="filtro"]').val('');
-    </script>
+        ajaxClientes();
+        $(document).ready(function(){
+            $(".pagination a").on('click',function(e){
+                e.preventDefault();
+                ajaxClientes($(this).attr('href'));//falta pasar el numero de pagina
+            });
+        });
+        
+   </script>
 @stop
 
 @section('modal')

@@ -11,7 +11,34 @@ use Symfony\Component\HttpFoundation\Response;
 use DB;
 
 class ClientsController extends Controller
+
+
 {
+    public function ApiClientes(Request $request){
+        if($request->has('filtro')){
+            $filtro=$request->input('filtro');
+            $clientes=DB::table('clientes')
+                            ->select('id', 'Nombre','Direccion', 'Localidad', 'cif/nif')
+                            ->where('nombre','LIKE',"%".$request->input('filtro')."%")
+                            ->orwhere('localidad','LIKE',"%".$request->input('filtro')."%")
+                            ->orwhere('cif/nif','LIKE',"%".$request->input('filtro')."%")
+                            ->paginate(5)
+                            ->appends('filtro',$filtro);
+            return $clientes;
+            
+        }else{
+        $filtro=null;
+        $clientes = DB::table('clientes')
+                ->select('id', 'Nombre','Direccion', 'Localidad', 'cif/nif')
+                ->paginate(5);            
+                return $clientes;
+
+
+        }if($request->ajax()){
+            return Response::json($clientes);
+        }
+        return $clientes;
+    }
     /**
      * return de la view 
      * */

@@ -55,29 +55,28 @@ function CreateLinkPag(data) {
 }
 function ajaxClientes(page){
 //console.log("Pagina antes del done:"+page);
-$.ajax({
-        url:AjUrl,
-        data: {
-            page:page
-        },
-        
-        
-    })
-    .done(function(res){
-        $('#ClientsTable').empty();
-        CreateTable("#ClientsTable",res.data); //crear tabla nuevo contenido
-        CreateLinks();// links de los elementos de la tabla
-        CreateLinkPag(res);// links paginacion
-        console.log(res);
-        $(document).ready(function(){
-            $(".pagination a").on('click',function(e){
-                e.preventDefault();
-                ajaxClientes($(this).attr('href'));
+    $.ajax({
+            url:AjUrl,
+            data: {
+                page:page
+            },
+            
+            
+        })
+        .done(function(res){
+            $('#ClientsTable').empty();
+            CreateTable("#ClientsTable",res.data); //crear tabla nuevo contenido
+            CreateLinks();// links de los elementos de la tabla
+            CreateLinkPag(res);// links paginacion
+            //console.log(res);
+            $(document).ready(function(){
+                $(".pagination a").on('click',function(e){
+                    e.preventDefault();
+                    ajaxClientes($(this).attr('href'));
+                });
             });
+        })
+        .fail(function(jqXHR,textStatus){
+            console.log("fail: "+textStatus);
         });
-    })
-    .fail(function(jqXHR,textStatus){
-        console.log("fail: "+textStatus);
-    });
-
 }

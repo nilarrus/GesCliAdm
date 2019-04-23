@@ -2,7 +2,19 @@
 $('#form').submit(function(e){
     e.preventDefault();
     if(checkNulls() && validate()){
-        $('#form')[0].submit();
+		/*$.ajax({
+            url:"/clients/create"     
+            
+        })
+        .done(function(res){
+            
+        })
+        .fail(function(jqXHR,textStatus){
+            console.log("fail: "+textStatus);
+		});*/
+		
+		$('#form')[0].submit();
+		
     }
 });
 

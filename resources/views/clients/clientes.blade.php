@@ -31,6 +31,8 @@
         //console.log(clientes)
 
         CreateTable("#ClientsTable",clientes.data,undefined);
+        //console.log(clientes);
+        //CreateLinkPag(clientes);
 
         createFilter('#ClientsTable table thead',"/","clientes","table");
         
@@ -43,11 +45,11 @@
        });
 
         $('input[name="filtro"]').val('');
-        ajaxClientes();
+        ajaxClientes("1");
         $(document).ready(function(){
             $(".pagination a").on('click',function(e){
                 e.preventDefault();
-                ajaxClientes($(this).attr('href'));//falta pasar el numero de pagina i token 
+                ajaxClientes($(this).attr('href'));
             });
         });
         

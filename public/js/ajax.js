@@ -20,9 +20,8 @@ function CLiLink(par,txt,attr){
 }
 
 function CreateLinkPag(data) {
-    //$("#ClientsTable").empty();
-    $("#link").empty();
-    var ul = $("<ul>").attr({'class':'pagination','role':'navigation'}).appendTo("#link");
+    $("#links").empty();
+    var ul = $("<ul>").attr({'class':'pagination','role':'navigation'}).appendTo("#links");
     //pagia 1 
     if(data.current_page==1){
         //primera pagina elemento con span
@@ -55,18 +54,27 @@ function CreateLinkPag(data) {
     }
 }
 function ajaxClientes(page){
-console.log(page);
-    $.ajax({
+//console.log("Pagina antes del done:"+page);
+$.ajax({
         url:AjUrl,
-        data: {page:page}
+        data: {
+            page:page
+        },
+        
         
     })
     .done(function(res){
-        
-        //CreateTable($("#ClientsTable"),res.data);
-        CreateLinks();
-        CreateLinkPag(res);
-        //console.log(res);
+        $('#ClientsTable').empty();
+        CreateTable("#ClientsTable",res.data); //crear tabla nuevo contenido
+        CreateLinks();// links de los elementos de la tabla
+        CreateLinkPag(res);// links paginacion
+        console.log(res);
+        $(document).ready(function(){
+            $(".pagination a").on('click',function(e){
+                e.preventDefault();
+                ajaxClientes($(this).attr('href'));
+            });
+        });
     })
     .fail(function(jqXHR,textStatus){
         console.log("fail: "+textStatus);

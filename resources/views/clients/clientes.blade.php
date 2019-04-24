@@ -30,11 +30,11 @@
 
         //console.log(clientes)
 
-        CreateTable("#ClientsTable",clientes.data,undefined);
+        //CreateTable("#ClientsTable",clientes.data,undefined);
         //console.log(clientes);
         //CreateLinkPag(clientes);
 
-        createFilter('#ClientsTable table thead',"/","clientes","table");
+        //createFilter('#ClientsTable table thead',"/","clientes","table");
         
        $('.clickable').each(function(){
             $(this).attr("data-href","/clients/"+$(this).attr("id"));

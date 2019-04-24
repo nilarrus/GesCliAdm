@@ -87,7 +87,7 @@ class ClientsController extends Controller
                 'cp' => $request->input('cp'),
             ]
         );
-        return redirect('/');
+        //return redirect('/');
     }
 
     public function edit(Request $request, $id){

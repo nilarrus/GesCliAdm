@@ -55,7 +55,6 @@
         
    </script>
 @stop
-
 @section('modal')
     <div id="costumModal10" class="modal" data-easein="bounceIn"  tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -80,6 +79,7 @@
                             <label for="email">E-Mail: <input type="text" name="email" class="input"></label>
                             <label for="telefono">Teléfono: <input type="text" name="telefono" class="input"></label>
                             <label for="cp">Código Postal: <input type="text" name="cp" class="input"></label>
+                            <input type="text" name="ruta" value="create" hidden="true">
                         </div>
                     </div>
                     <div class="modal-footer">

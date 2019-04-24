@@ -80,3 +80,27 @@ function ajaxClientes(page){
             console.log("fail: "+textStatus);
         });
 }
+function ajaxCreateCliente(urlr) {
+    $.ajax({
+        url:urlr,
+        type:'POST',
+        dataType: 'html',
+        data:$('#form').first().serialize()    
+        
+    })
+    .done(function(res){
+        console.log("funciona");
+        if ($("input[name='ruta']").val()=='create'){
+            //$('#costumModal10').modal('toggle');
+            /*$(".modal-form").empty();
+            $(".modal-footer .btn-primary").remove();
+            $(".modal-form").append($("<div>").text("Succes"));*/
+            ajaxClientes(1);
+        }
+    })
+    .fail(function(jqXHR,textStatus,errorThrown){
+        console.log(""+"status:"+jqXHR.status+" "+textStatus+": "+errorThrown);
+        /*$(".modal-form").empty();
+        $(".modal-form").append($("<div>").text("Fail"));*/
+    });
+}

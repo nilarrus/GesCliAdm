@@ -2,18 +2,11 @@
 $('#form').submit(function(e){
     e.preventDefault();
     if(checkNulls() && validate()){
-		/*$.ajax({
-            url:"/clients/create"     
-            
-        })
-        .done(function(res){
-            
-        })
-        .fail(function(jqXHR,textStatus){
-            console.log("fail: "+textStatus);
-		});*/
-		
-		$('#form')[0].submit();
+		//console.log($("input[name='ruta']").val());
+		var urlr = '/clients/'+$("input[name='ruta']").val();
+		console.log(urlr);
+		ajaxCreateCliente(urlr);
+		//$('#form')[0].submit();
 		
     }
 });

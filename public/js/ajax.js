@@ -54,7 +54,7 @@ function CreateLinkPag(data) {
     }
 }
 function ajaxClientes(page){
-//console.log("Pagina antes del done:"+page);
+console.log("Pagina antes del done:"+page);
     $.ajax({
             url:AjUrl,
             data: {
@@ -64,11 +64,13 @@ function ajaxClientes(page){
             
         })
         .done(function(res){
+
             $('#ClientsTable').empty();
             CreateTable("#ClientsTable",res.data); //crear tabla nuevo contenido
             CreateLinks();// links de los elementos de la tabla
             CreateLinkPag(res);// links paginacion
-            //console.log(res);
+            createFilter('#ClientsTable table thead',"/","clientes","table");
+            console.log(res);
             $(document).ready(function(){
                 $(".pagination a").on('click',function(e){
                     e.preventDefault();
@@ -80,3 +82,35 @@ function ajaxClientes(page){
             console.log("fail: "+textStatus);
         });
 }
+
+
+
+$(document).on("click", "#ClientsTable input[value='Filtrar']", function(event){
+    event.preventDefault();
+
+    var inputfiltro = $("input[name='filtro']").val();
+    var urlvista = window.location.origin+"/api/clientes";
+
+    
+    //si no hacemos el replace, cuando cree uno nuevo, no funcionara bien
+    $.ajax({
+        url: urlvista,
+        data: {filtro: inputfiltro},
+        type: 'GET',
+        success: function(data){
+            console.log(data);
+            $('#ClientsTable').empty();
+            CreateTable("#ClientsTable",data.data); //crear tabla nuevo contenido
+            CreateLinks();// links de los elementos de la tabla
+            CreateLinkPag(data);// links paginacion
+            createFilter('#ClientsTable table thead',"/","clientes","table");
+        },
+        error: function(e) {
+                console.log("error");
+                //console.log($('#form').first().serialize());
+                console.log(e.status);
+        }
+        
+    })
+    
+})

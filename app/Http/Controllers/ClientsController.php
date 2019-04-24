@@ -15,6 +15,7 @@ class ClientsController extends Controller
 
 {
     public function ApiClientes(Request $request){
+        
         if($request->has('filtro')){
             $filtro=$request->input('filtro');
             $clientes=DB::table('clientes')
@@ -34,10 +35,7 @@ class ClientsController extends Controller
                 return $clientes;
 
 
-        }if($request->ajax()){
-            return Response::json($clientes);
         }
-        return $clientes;
     }
     /**
      * return de la view 

@@ -92,7 +92,6 @@ $(document).on("click", "#ClientsTable input[value='Filtrar']", function(event){
     var urlvista = window.location.origin+"/api/clientes";
 
     
-    //si no hacemos el replace, cuando cree uno nuevo, no funcionara bien
     $.ajax({
         url: urlvista,
         data: {filtro: inputfiltro},

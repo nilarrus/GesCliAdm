@@ -91,9 +91,9 @@ function ajaxCreateCliente(urlr) {
         
     })
     .done(function(res){
-        console.log("funciona");
+       // console.log("funciona");
         if ($("input[name='ruta']").val()=='create'){
-            //$('#costumModal10').modal('toggle');
+            $('#costumModal10').modal('toggle');
             /*$(".modal-form").empty();
             $(".modal-footer .btn-primary").remove();
             $(".modal-form").append($("<div>").text("Succes"));*/
@@ -118,7 +118,7 @@ $(document).on("click", "#ClientsTable input[value='Filtrar']", function(event){
         data: {filtro: inputfiltro},
         type: 'GET',
         success: function(data){
-            console.log(data);
+            //console.log(data);
             $('#ClientsTable').empty();
             CreateTable("#ClientsTable",data.data); //crear tabla nuevo contenido
             CreateLinks();// links de los elementos de la tabla

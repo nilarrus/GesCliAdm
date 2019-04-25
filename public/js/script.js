@@ -66,10 +66,10 @@ function createFilter(parent,url,vista,tipo){
         .attr({'type':'submit','value':'Filtrar',class:"btn"})
         .appendTo(form);
     var reset = $('<input>')
-        .attr({'type':'button','value':'Resetear',class:"btn"})
+        .attr({'type':'button','onclick':'ajaxClientes()','value':'Resetear',class:"btn"})
         .appendTo(form);
 
-    $(reset).click(function(){window.location.assign(url)});
+    //$(reset).click(function(){window.location.assign(url)});
 
     $('<input>')
         .attr({'type':'hidden',"name":"tipo", "value":vista})

@@ -124,6 +124,12 @@ $(document).on("click", "#ClientsTable input[value='Filtrar']", function(event){
             CreateLinks();// links de los elementos de la tabla
             CreateLinkPag(data);// links paginacion
             createFilter('#ClientsTable table thead',"/","clientes","table");
+            $(document).ready(function(){
+                $(".pagination a").on('click',function(e){
+                    e.preventDefault();
+                    ajaxClientes($(this).attr('href'));
+                });
+            });
         },
         error: function(e) {
                 console.log("error");
